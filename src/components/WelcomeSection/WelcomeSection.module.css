@@ -1,0 +1,136 @@
+.boxWelcomeSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.boxLogo {
+  margin-bottom: 64px;
+}
+
+.paragraph {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: 0.06em;
+  color: #2f2f2f;
+
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: #323f47;
+
+  margin-bottom: 42px;
+}
+
+.boxLink {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.linkReg {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+  background-color: #5f8ae7;
+
+  border-radius: 30px;
+  padding: 14px 19px;
+  /* width: 116px; */
+  height: 46px;
+
+  &:hover {
+    background-color: #2563eb;
+  }
+}
+
+.linkLogin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+
+  box-sizing: border-box;
+  border: 1px solid #323f47;
+  border-radius: 30px;
+  padding: 14px 28px;
+  /* width: 104px; */
+  height: 46px;
+
+  &:hover {
+    color: #fff;
+    background-color: #2563eb;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .boxLogo {
+    margin-bottom: 50px;
+  }
+
+  .boxTitle {
+    margin-left: 32px;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    line-height: 1.5;
+
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 64px;
+    line-height: 1.09;
+
+    margin-bottom: 52px;
+  }
+
+  .boxLink {
+    gap: 16px;
+  }
+
+  .linkReg {
+    font-size: 16px;
+    line-height: 1.5;
+
+    padding: 18px 40px;
+    height: 60px;
+  }
+
+  .linkLogin {
+    font-size: 16px;
+    line-height: 1.5;
+
+    padding: 18px 40px;
+    height: 60px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .boxLogo {
+    margin-bottom: 132px;
+  }
+
+  .title {
+    font-size: 80px;
+    line-height: 0.95;
+
+    margin-bottom: 72px;
+  }
+}

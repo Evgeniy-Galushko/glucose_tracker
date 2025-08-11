@@ -1,0 +1,49 @@
+.sectionHome {
+  box-sizing: border-box;
+  max-width: 375px;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+.homeBox {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.boxWelcomeSection {
+  box-sizing: border-box;
+  border-radius: 30px;
+  /* width: 343px; */
+  height: 411px;
+  padding: 24px 16px;
+  background-color: #f0eff4;
+}
+
+@media screen and (min-width: 768px) {
+  .sectionHome {
+    max-width: 768px;
+    padding: 32px;
+  }
+
+  .boxWelcomeSection {
+    height: 498px;
+    padding: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .sectionHome {
+    max-width: 1440px;
+  }
+
+  .homeBox {
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .boxWelcomeSection {
+    width: 672px;
+    height: 736px;
+  }
+}
