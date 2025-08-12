@@ -1,0 +1,58 @@
+.signUpPage {
+  box-sizing: border-box;
+  max-width: 375px;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+.boxSignUpPage {
+  display: flex;
+}
+
+.boxForm {
+  box-sizing: border-box;
+  background-color: #f0eff4;
+  border-radius: 30px;
+  padding: 24px 16px;
+}
+
+.boxImg {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .signUpPage {
+    max-width: 768px;
+    padding: 32px;
+  }
+  .boxForm {
+    padding: 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .signUpPage {
+    max-width: 1440px;
+  }
+
+  .boxSignUpPage {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+  }
+
+  .boxForm {
+    width: 672px;
+    height: 736px;
+  }
+
+  .boxImg {
+    display: block;
+  }
+
+  .backgroundImage {
+    border-radius: 30px;
+    width: 672px;
+    height: 736px;
+  }
+}
