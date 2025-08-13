@@ -1,14 +1,20 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Logo from "../Logo/Logo.jsx";
 import s from "./SignInForm.module.css";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import DisplayPasswordSecond from "../DisplayPasswordSecond/DisplayPasswordSecond.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { clsx } from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectToken } from "../../redux/auth/selectors.js";
+import { loginRequest } from "../../redux/auth/operations.js";
 
 export default function SignInForm() {
   const [displayPassword, setDisplayPassword] = useState(false);
+  const token = useSelector(selectToken);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const emailId = useId();
   const passwordId = useId();
@@ -35,10 +41,17 @@ export default function SignInForm() {
   };
 
   const handleSubmit = (values, action) => {
-    console.log(values);
+    // console.log(values);
+    dispatch(loginRequest(values));
 
     action.resetForm();
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/tracker");
+    }
+  }, [navigate, token]);
 
   return (
     <>
