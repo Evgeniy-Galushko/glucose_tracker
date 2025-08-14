@@ -12,6 +12,11 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  AreaChart,
+  Area,
+  Bar,
+  BarChart,
+  Rectangle,
 } from "recharts";
 
 export default function MeasurementSchedule() {
@@ -22,69 +27,69 @@ export default function MeasurementSchedule() {
     console.log(oneDay);
   }
 
-  const dat = [
+  const arry = [
     {
+      createdAt: "2025-08-13T14:01:40.107Z",
       date: "2025-08-13",
-      time: "08.00",
       measurementTime: "натощак",
       sugarLevel: 8,
+      time: "08.00",
+      updatedAt: "2025-08-13T14:01:40.107Z",
+      userId: "6890b0ab055da8d96cf33186",
+      _id: "689c9ac40de983654e9703bb",
     },
     {
+      createdAt: "2025-08-13T14:01:40.107Z",
       date: "2025-08-13",
-      time: "12.00",
+      measurementTime: "после еды",
+      sugarLevel: 5,
+      time: "10.00",
+      updatedAt: "2025-08-13T14:01:40.107Z",
+      userId: "6890b0ab055da8d96cf33186",
+      _id: "689c9ac40de983654e9703bb",
+    },
+    {
+      createdAt: "2025-08-13T14:01:40.107Z",
+      date: "2025-08-13",
       measurementTime: "натощак",
       sugarLevel: 7,
+      time: "12.00",
+      updatedAt: "2025-08-13T14:01:40.107Z",
+      userId: "6890b0ab055da8d96cf33186",
+      _id: "689c9ac40de983654e9703bb",
     },
     {
+      createdAt: "2025-08-13T14:01:40.107Z",
       date: "2025-08-13",
-      time: "16.00",
-      measurementTime: "натощак",
-      sugarLevel: 7.5,
+      measurementTime: "после еды",
+      sugarLevel: 10,
+      time: "14.00",
+      updatedAt: "2025-08-13T14:01:40.107Z",
+      userId: "6890b0ab055da8d96cf33186",
+      _id: "689c9ac40de983654e9703bb",
     },
   ];
 
-  const data = [
+  const onAnEmptyStomach = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      date: "2025-08-13",
+      onAnEmptyStomach: 7,
+      time: "12.00",
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      date: "2025-08-13",
+      onAnEmptyStomach: 8,
+      time: "08.00",
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      date: "2025-08-13",
+      afterEating: 5,
+      time: "10.00",
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      date: "2025-08-13",
+      afterEating: 10,
+      time: "14.00",
     },
   ];
 
@@ -104,7 +109,7 @@ export default function MeasurementSchedule() {
         <LineChart
           width={500}
           height={300}
-          data={dat}
+          data={oneDay}
           margin={{
             top: 5,
             right: 30,
@@ -114,24 +119,69 @@ export default function MeasurementSchedule() {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="time" />
-          <YAxis ticks={[2, 4, 6, 8, 10, 12, 14, 16, 18, 20]} />
+          <YAxis ticks={[2, 4, 6, 8, 10, 12, 14, 16]} />
           <Tooltip />
           <Legend />
           <Line
+            name="натощак"
+            // legendType="none"
             type="monotone"
-            dataKey="sugarLevel"
+            dataKey="onAnEmptyStomach"
             stroke="#8884d8"
             activeDot={{ r: 8 }}
           />
-          <Line type="monotone" dataKey="после еды" stroke="#82ca9d" />
+          <Line
+            name="после еды"
+            type="monotone"
+            dataKey="afterEating"
+            stroke="#82ca9d"
+          />
         </LineChart>
       </ResponsiveContainer>
-      <h1>grafic</h1>
-      {/* <ResponsiveContainer width={500} height={300}>
-        <LineChart
+
+      <AreaChart
+        width={530}
+        height={300}
+        data={oneDay}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+      >
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          </linearGradient>
+          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="time" />
+        <YAxis ticks={[2, 4, 6, 8, 10, 12, 14, 16]} />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Area
+          name="натощак"
+          type="monotone"
+          dataKey="onAnEmptyStomach"
+          stroke="#8884d8"
+          fillOpacity={1}
+          fill="url(#colorUv)"
+        />
+        <Area
+          name="после еды"
+          type="monotone"
+          dataKey="afterEating"
+          stroke="#82ca9d"
+          fillOpacity={1}
+          fill="url(#colorPv)"
+        />
+      </AreaChart>
+
+      <ResponsiveContainer width={500} height={300}>
+        <BarChart
           width={500}
           height={300}
-          data={data}
+          data={oneDay}
           margin={{
             top: 5,
             right: 30,
@@ -140,19 +190,24 @@ export default function MeasurementSchedule() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="time" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
+          <Bar
+            name="натощак"
+            dataKey="onAnEmptyStomach"
+            fill="#8884d8"
+            activeBar={<Rectangle fill="pink" stroke="blue" />}
           />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-      </ResponsiveContainer> */}
+          <Bar
+            name="после еды"
+            dataKey="afterEating"
+            fill="#82ca9d"
+            activeBar={<Rectangle fill="gold" stroke="purple" />}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </>
   );
 }
