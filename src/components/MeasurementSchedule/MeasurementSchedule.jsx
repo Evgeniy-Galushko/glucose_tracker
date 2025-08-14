@@ -27,72 +27,6 @@ export default function MeasurementSchedule() {
     console.log(oneDay);
   }
 
-  const arry = [
-    {
-      createdAt: "2025-08-13T14:01:40.107Z",
-      date: "2025-08-13",
-      measurementTime: "натощак",
-      sugarLevel: 8,
-      time: "08.00",
-      updatedAt: "2025-08-13T14:01:40.107Z",
-      userId: "6890b0ab055da8d96cf33186",
-      _id: "689c9ac40de983654e9703bb",
-    },
-    {
-      createdAt: "2025-08-13T14:01:40.107Z",
-      date: "2025-08-13",
-      measurementTime: "после еды",
-      sugarLevel: 5,
-      time: "10.00",
-      updatedAt: "2025-08-13T14:01:40.107Z",
-      userId: "6890b0ab055da8d96cf33186",
-      _id: "689c9ac40de983654e9703bb",
-    },
-    {
-      createdAt: "2025-08-13T14:01:40.107Z",
-      date: "2025-08-13",
-      measurementTime: "натощак",
-      sugarLevel: 7,
-      time: "12.00",
-      updatedAt: "2025-08-13T14:01:40.107Z",
-      userId: "6890b0ab055da8d96cf33186",
-      _id: "689c9ac40de983654e9703bb",
-    },
-    {
-      createdAt: "2025-08-13T14:01:40.107Z",
-      date: "2025-08-13",
-      measurementTime: "после еды",
-      sugarLevel: 10,
-      time: "14.00",
-      updatedAt: "2025-08-13T14:01:40.107Z",
-      userId: "6890b0ab055da8d96cf33186",
-      _id: "689c9ac40de983654e9703bb",
-    },
-  ];
-
-  const onAnEmptyStomach = [
-    {
-      date: "2025-08-13",
-      onAnEmptyStomach: 7,
-      time: "12.00",
-    },
-    {
-      date: "2025-08-13",
-      onAnEmptyStomach: 8,
-      time: "08.00",
-    },
-    {
-      date: "2025-08-13",
-      afterEating: 5,
-      time: "10.00",
-    },
-    {
-      date: "2025-08-13",
-      afterEating: 10,
-      time: "14.00",
-    },
-  ];
-
   const day = new Date();
 
   console.log(day.getDate());
@@ -105,7 +39,7 @@ export default function MeasurementSchedule() {
 
   return (
     <>
-      <ResponsiveContainer width={500} height={300}>
+      {/* <ResponsiveContainer width={500} height={300}>
         <LineChart
           width={500}
           height={300}
@@ -137,7 +71,7 @@ export default function MeasurementSchedule() {
             stroke="#82ca9d"
           />
         </LineChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
 
       <AreaChart
         width={530}
@@ -160,6 +94,7 @@ export default function MeasurementSchedule() {
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Area
+          dot={{ stroke: "#524f84ff", strokeWidth: 1, r: 5 }}
           name="натощак"
           type="monotone"
           dataKey="onAnEmptyStomach"
@@ -168,6 +103,8 @@ export default function MeasurementSchedule() {
           fill="url(#colorUv)"
         />
         <Area
+          dot={{ stroke: "#5a8269ff", strokeWidth: 1, r: 5 }}
+          // stackId="после еды"
           name="после еды"
           type="monotone"
           dataKey="afterEating"
@@ -177,7 +114,7 @@ export default function MeasurementSchedule() {
         />
       </AreaChart>
 
-      <ResponsiveContainer width={500} height={300}>
+      {/* <ResponsiveContainer width={500} height={300}>
         <BarChart
           width={500}
           height={300}
@@ -207,7 +144,7 @@ export default function MeasurementSchedule() {
             activeBar={<Rectangle fill="gold" stroke="purple" />}
           />
         </BarChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
     </>
   );
 }
