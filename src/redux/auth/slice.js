@@ -16,6 +16,7 @@ const authSlise = createSlice({
       age: null,
       weight: null,
       height: null,
+      bloodSugarNorm: null,
     },
     token: null,
     isLoading: false,
@@ -44,6 +45,7 @@ const authSlise = createSlice({
         state.user.age = action.payload.age;
         state.user.weight = action.payload.weight;
         state.user.height = action.payload.height;
+        state.user.bloodSugarNorm = action.payload.bloodSugarNorm;
         state.isLoading = false;
         state.error = null;
       })

@@ -74,8 +74,8 @@ export const oneMonthRequest = createAsyncThunk(
       const data = await axios.get(
         `/api/measurements/in-one-month?month=${oneMonth}`
       );
-      console.log(data.data);
-      return data.data;
+      // console.log(data.data);
+      return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

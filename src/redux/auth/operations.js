@@ -47,7 +47,9 @@ export const userInformRequest = createAsyncThunk(
       if (token) {
         setAuthHeader(token);
       }
-      await axios.put("/api/user/userInformation");
+      const data = await axios.get("/api/user/userInformation");
+      // console.log(data.data.data);
+      return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

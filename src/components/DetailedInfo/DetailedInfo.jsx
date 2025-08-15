@@ -3,17 +3,21 @@ import s from "./DetailedInfo.module.css";
 import { signoutRequest } from "../../redux/auth/operations.js";
 import { selectToken, selectUser } from "../../redux/auth/selectors.js";
 import { useNavigate } from "react-router-dom";
+import { BsGear } from "react-icons/bs";
 import sprite from "../../img/icon-sprite.svg";
+import { useEffect } from "react";
 
 export default function DetailedInfo() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
-  const navigate = useNavigate();
 
-  if (!token) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
 
   // console.log(token);
   const handleLogOut = () => {
@@ -26,9 +30,7 @@ export default function DetailedInfo() {
       <ul>
         <li>
           <button type="button">
-            <svg className={s.icon} width={16} height={16}>
-              <use href={`${sprite}#icon-settings`} />
-            </svg>
+            <BsGear size={16} /> Параметр
           </button>
         </li>
         <li>
@@ -37,7 +39,9 @@ export default function DetailedInfo() {
           </button>
         </li>
       </ul>
-      <button>Добавить измерение</button>
+      <button type="button">
+        <span>+</span> Добавить измерение
+      </button>
     </>
   );
 }
