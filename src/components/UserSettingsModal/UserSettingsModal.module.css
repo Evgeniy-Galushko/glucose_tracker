@@ -1,0 +1,190 @@
+.modal {
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px 20px;
+  /* border-radius: 15px; */
+  width: 343px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  left: 293px;
+  border: none;
+  background-color: inherit;
+}
+
+/* ----------------------- */
+.fullscreenContainer {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  /* justify-content: space-between; */
+  /* width: 100%; */
+  /* min-height: 100%; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  /* padding: 20px 0; */
+  box-sizing: border-box;
+}
+
+.radioGroupContainer {
+  /* background-color: rgba(26, 27, 40, 0.7); */
+  /* padding: 20px 35px; */
+  /* border-radius: 20px; */
+  /* border: 1px solid rgba(255, 255, 255, 0.055); */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* width: 90%; */
+  /* max-width: 280px; */
+  transition: all 0.3s ease;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  margin: 30px 0;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+.radioInput {
+  display: none;
+}
+
+.radioCustom {
+  width: 12px;
+  height: 12px;
+  background-color: transparent;
+  border: 2px solid #5c5e79;
+  border-radius: 50%;
+  margin-right: 18px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.radioCustom::before {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #8a8b9f;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.radioCustom::after {
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top-color: #00a6ff;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s ease;
+}
+
+.radioText {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+  transition: color 0.3s ease;
+}
+
+.radioLabel:hover .radioInput:not(:checked) + .radio-custom {
+  transform: scale(1.1);
+  border-color: #8a8daf;
+}
+
+.radioLabel:hover .radioText {
+  color: #e2e4f4;
+}
+
+.radioInput:checked + .radioCustom {
+  border-color: #00a6ff;
+  transform: scale(0.9);
+}
+
+.radioInput:checked + .radioCustom::before {
+  transform: scale(1);
+  background-color: #00a6ff;
+}
+
+.radioInput:checked + .radioCustom::after {
+  opacity: 1;
+  transform: scale(1.3);
+  animation: orbit 2.5s infinite linear;
+  box-shadow: 0 0 30px #00a6ff, 0 0 80px rgba(0, 166, 255, 0.2);
+}
+
+.radioInput:checked ~ .radio-text {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.radioLabel:nth-child(2) .radio-input:checked + .radioCustom {
+  border-color: #e900ff;
+  box-shadow: none;
+}
+.radioLabel:nth-child(2) .radio-input:checked + .radioCustom::before {
+  background-color: #e900ff;
+}
+.radioLabel:nth-child(2) .radio-input:checked + .radioCustom::after {
+  border-top-color: #e900ff;
+  box-shadow: 0 0 30px #e900ff, 0 0 80px rgba(233, 0, 255, 0.2);
+}
+.radioLabel:nth-child(2) .radio-input:checked ~ .radio-text {
+  color: #ffffff;
+}
+
+.radioLabel:nth-child(3) .radio-input:checked + .radioCustom {
+  border-color: #00ffc2;
+  box-shadow: none;
+}
+.radioLabel:nth-child(3) .radio-input:checked + .radioCustom::before {
+  background-color: #00ffc2;
+}
+.radio-label:nth-child(3) .radio-input:checked + .radio-custom::after {
+  border-top-color: #00ffc2;
+  box-shadow: 0 0 30px #00ffc2, 0 0 80px rgba(0, 255, 194, 0.2);
+}
+.radioLabel:nth-child(3) .radio-input:checked ~ .radio-text {
+  color: #ffffff;
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Query for Mobile Responsiveness */
+@media (max-width: 400px) {
+  .radioGroupContainer {
+    /* padding: 15px 25px; */
+  }
+
+  .radioLabel {
+    margin: 25px 0;
+  }
+
+  .radioText {
+    font-size: 1rem;
+  }
+}
+
+/* ----------------------- */

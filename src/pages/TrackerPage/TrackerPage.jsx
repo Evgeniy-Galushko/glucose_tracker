@@ -10,6 +10,7 @@ import {
   oneDayRequest,
   oneMonthRequest,
 } from "../../redux/measuring/operations.js";
+import UserSettingsModal from "../../components/UserSettingsModal/UserSettingsModal.jsx";
 
 export default function TrackerPage() {
   const [windowSize, setWindowSize] = useState({
@@ -18,10 +19,11 @@ export default function TrackerPage() {
   });
   const [screenSize, setScreenSize] = useState(null);
   const [graphHeights, setGraphHeights] = useState(null);
+  const [userSettingsModal, setUserSettingsModal] = useState(false);
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
-  console.log(userInformation);
+  // console.log(userInformation);
 
   useEffect(() => {
     dispatch(userInformRequest());
@@ -51,13 +53,17 @@ export default function TrackerPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch, windowSize.width]);
 
-  // console.log(windowSize.width >= 1440);
-
-  // console.log(screenSize);
-  // console.log(windowSize.width >= 768 && windowSize.width < 1440);
+  const handleCloseUserSettingsModal = () => {
+    setUserSettingsModal(false);
+  };
 
   return (
     <section className={s.sectionTracker}>
+      <UserSettingsModal
+        openModal={userSettingsModal}
+        handleCloseUserSettingsModal={handleCloseUserSettingsModal}
+        userSettingsModal={userSettingsModal}
+      />
       <ul className={s.tracker}>
         <li className={s.boxTracker}>
           <MeasurementSchedule
@@ -66,7 +72,7 @@ export default function TrackerPage() {
           />
         </li>
         <li className={s.boxTracker}>
-          <DetailedInfo />
+          <DetailedInfo setUserSettingsModal={setUserSettingsModal} />
         </li>
       </ul>
     </section>
