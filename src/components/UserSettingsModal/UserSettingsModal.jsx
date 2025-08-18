@@ -5,6 +5,8 @@ import { Field, Form, Formik } from "formik";
 import { useId } from "react";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { useSelector } from "react-redux";
+import rendersYear from "../../utils/rendersYear.js";
+import { clsx } from "clsx";
 
 export default function UserSettingsModal({
   openModal,
@@ -26,7 +28,8 @@ export default function UserSettingsModal({
     },
     content: {
       border: "none",
-      overflow: "auto",
+      // overflow: "auto",
+
       padding: "none",
       borderRadius: "15px",
       top: "50%",
@@ -45,13 +48,15 @@ export default function UserSettingsModal({
     name: "",
     bloodSugarNorm: "",
     gender: userInformation.gender,
+    birthYear: "",
   };
 
   const handleSubmit = (values, actions) => {
     console.log(values);
   };
 
-  console.log(userInformation);
+  // console.log(userInformation);
+  const listYear = rendersYear();
 
   return (
     <Modal
@@ -70,11 +75,11 @@ export default function UserSettingsModal({
             <use href={`${sprite}#icon-close`} />
           </svg>
         </button>
-        <h2>Параметры</h2>
+        <h2 className={s.titleSetting}>Параметры</h2>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           {({ setFieldValue, values }) => (
             <Form>
-              <p>Ваша пол</p>
+              <p className={s.headlines}>Ваша пол</p>
               <ul className={s.fullscreenContainer}>
                 <li className={s.radioGroupContainer}>
                   <label htmlFor={genderIdMan} className={s.radioLabel}>
@@ -105,54 +110,189 @@ export default function UserSettingsModal({
                   </label>
                 </li>
               </ul>
-              <ul>
-                <li>
-                  <label htmlFor={nameId}>Ваше имя</label>
+              <ul className={s.boxUserData}>
+                <li className={s.boxInput}>
+                  <label className={s.headlines} htmlFor={nameId}>
+                    Ваше имя
+                  </label>
                   <Field
+                    className={s.input}
                     id={nameId}
                     type="text"
                     name="name"
                     placeholder={userInformation.name}
                   />
                 </li>
-                <li>
-                  <label htmlFor={ageId}>Ваш возраст</label>
-                  <Field
-                    id={ageId}
-                    type="number"
-                    name="age"
-                    placeholder={userInformation.age}
-                  />
+                <li className={s.boxInput}>
+                  <label className={s.headlines} htmlFor={ageId}>
+                    Ваш возраст
+                  </label>
+                  <div className={s.boxSelect}>
+                    <Field
+                      className={s.select}
+                      // id={ageId}
+                      as="select"
+                      name="birthYear"
+                      value={values.birthYear}
+                      onChange={(e) => {
+                        const userData = e.target.value;
+                        setFieldValue("birthYear", userData);
+                        const currentDate = new Date();
+                        const difference = currentDate.getFullYear() - userData;
+
+                        setFieldValue("age", difference);
+
+                        if (difference === 0) {
+                          setFieldValue("bloodSugarNorm", 4);
+                        }
+                        if (difference > 0 && difference <= 14) {
+                          setFieldValue("bloodSugarNorm", 4.4);
+                        }
+                        if (difference > 14 && difference <= 60) {
+                          setFieldValue("bloodSugarNorm", 5);
+                        }
+                        if (difference > 60 && difference <= 90) {
+                          setFieldValue("bloodSugarNorm", 5.5);
+                        }
+                        if (difference > 90) {
+                          setFieldValue("bloodSugarNorm", 5.45);
+                        }
+                      }}
+                    >
+                      <option>Выберите год рождения</option>
+                      {listYear.map((year, index) => {
+                        return (
+                          <option key={index} value={year}>
+                            {year}
+                          </option>
+                        );
+                      })}
+                    </Field>
+                    <Field
+                      className={clsx(s.select, s.inputAge)}
+                      id={ageId}
+                      type="text"
+                      name="age"
+                      value={
+                        values.age >= 0 ? values.age : userInformation.age || 0
+                      }
+                      placeholder={userInformation.age || 0}
+                      readOnly
+                    />
+                  </div>
                 </li>
-                <li>
-                  <label htmlFor={weightId}>Ваш вес</label>
+                <li className={s.boxInput}>
+                  <label className={s.headlines} htmlFor={weightId}>
+                    Ваш вес
+                  </label>
                   <Field
+                    className={s.input}
                     id={weightId}
                     type="number"
                     name="weight"
                     placeholder={userInformation.weight}
                   />
                 </li>
-                <li>
-                  <label htmlFor={heightId}>Ваш рост</label>
+                <li className={s.boxInput}>
+                  <label className={s.headlines} htmlFor={heightId}>
+                    Ваш рост
+                  </label>
                   <Field
+                    className={s.input}
                     id={heightId}
                     type="number"
                     name="height"
                     placeholder={userInformation.height}
                   />
                 </li>
-                <li>
-                  <label htmlFor={bloodSugarNormId}>Норма сахара в крови</label>
+                <li className={s.boxInput}>
+                  <label className={s.headlines} htmlFor={bloodSugarNormId}>
+                    <span className={s.footnote}>*</span> Норма сахара в крови
+                  </label>
                   <Field
+                    className={s.input}
                     id={bloodSugarNormId}
                     type="number"
                     name="bloodSugarNorm"
+                    value={values.bloodSugarNorm}
                     placeholder={userInformation.bloodSugarNorm}
+                    readOnly
                   />
                 </li>
               </ul>
-              <button type="submit">Сохранять</button>
+              <h3 className={s.titleDescription}>
+                <span className={s.footnote}>*</span> Норма сахара в крови
+                рассчитывается в зависимости от возраста.
+              </h3>
+              <div className={s.boxLevelDescription}>
+                <h4 className={s.subparagraphs}>Норма сахара на тощак:</h4>
+                <ul>
+                  <li>
+                    <p className={s.paragraph}>
+                      - новорожденные (до 1 мес): 2.8 – 4.4 средняя 3,6 ммоль/л.
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - 1 мес – 6 лет: 3.3 – 5.5 средняя 4,4 ммоль/л.
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - 6 – 14 лет: 3.3 – 5.5 средняя 4,4 ммоль/л.
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - взрослые от 14 до 60 лет: 4.1 - 5.9 средняя 5 ммоль/л.
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - пожилые люди (60+ лет): 4.6 - 6.4 средняя 5,5 ммоль/л.
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - люди старше 90 лет: 4.2 - 6.7 средняя 5,45 ммоль/л.
+                    </p>
+                  </li>
+                </ul>
+                <h4 className={s.subparagraphs}>Через 2 часа после еды:</h4>
+                <ul>
+                  <li>
+                    <p className={s.paragraph}>
+                      - новорожденные (до 1 мес) до 5.5 ммоль/л
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - 1 мес – 6 лет до 7.8 ммоль/л
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>- 6 – 14 лет до 7.8 ммоль/л</p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      -взрослые от 14 до 60 лет: до 7.8 ммоль/л
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - пожилые люди (60+ лет): до 8.0 ммоль/л
+                    </p>
+                  </li>
+                  <li>
+                    <p className={s.paragraph}>
+                      - люди старше 90 лет: 4.2 - до 8.5 ммоль/л
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <button className={s.buttonSubmit} type="submit">
+                Сохранять
+              </button>
             </Form>
           )}
         </Formik>

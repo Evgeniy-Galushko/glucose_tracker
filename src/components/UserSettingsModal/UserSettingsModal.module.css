@@ -2,8 +2,15 @@
   position: relative;
   box-sizing: border-box;
   padding: 40px 20px;
+  height: 100vh;
   /* border-radius: 15px; */
   width: 343px;
+  overflow-y: auto;
+  /* overflow-y: hidden; */
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 .closeButton {
@@ -14,7 +21,35 @@
   background-color: inherit;
 }
 
-/* ----------------------- */
+.titleSetting {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+
+  margin-bottom: 40px;
+}
+
+.headlines {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  /* text-align: center; */
+  color: #323f47;
+}
+
+.footnote {
+  color: #00a6ff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* --------- RADIO -------------- */
 .fullscreenContainer {
   display: flex;
   align-items: center;
@@ -42,8 +77,11 @@
 
 .radioLabel {
   display: flex;
+  flex-direction: row;
+  gap: 15px;
   align-items: center;
-  margin: 30px 0;
+
+  margin: 20px 0;
   cursor: pointer;
   position: relative;
   user-select: none;
@@ -59,7 +97,7 @@
   background-color: transparent;
   border: 2px solid #5c5e79;
   border-radius: 50%;
-  margin-right: 18px;
+  /* margin-right: 18px; */
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
@@ -108,7 +146,7 @@
 }
 
 .radioLabel:hover .radioText {
-  color: #e2e4f4;
+  font-weight: 700;
 }
 
 .radioInput:checked + .radioCustom {
@@ -125,7 +163,7 @@
   opacity: 1;
   transform: scale(1.3);
   animation: orbit 2.5s infinite linear;
-  box-shadow: 0 0 30px #00a6ff, 0 0 80px rgba(0, 166, 255, 0.2);
+  /* box-shadow: 0 0 30px #00a6ff, 0 0 80px rgba(0, 166, 255, 0.2); */
 }
 
 .radioInput:checked ~ .radio-text {
@@ -133,7 +171,7 @@
   font-weight: 700;
 }
 
-.radioLabel:nth-child(2) .radio-input:checked + .radioCustom {
+/* .radioLabel:nth-child(2) .radio-input:checked + .radioCustom {
   border-color: #e900ff;
   box-shadow: none;
 }
@@ -146,9 +184,9 @@
 }
 .radioLabel:nth-child(2) .radio-input:checked ~ .radio-text {
   color: #ffffff;
-}
+} */
 
-.radioLabel:nth-child(3) .radio-input:checked + .radioCustom {
+/* .radioLabel:nth-child(3) .radio-input:checked + .radioCustom {
   border-color: #00ffc2;
   box-shadow: none;
 }
@@ -161,7 +199,7 @@
 }
 .radioLabel:nth-child(3) .radio-input:checked ~ .radio-text {
   color: #ffffff;
-}
+} */
 
 @keyframes orbit {
   from {
@@ -188,3 +226,286 @@
 }
 
 /* ----------------------- */
+.boxUserData {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.boxInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input {
+  box-sizing: border-box;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 16px;
+  width: 303px;
+  height: 46px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+
+  &::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.01em;
+    color: #6e6e6e;
+  }
+}
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.boxSelect {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.select {
+  box-sizing: border-box;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 16px;
+  width: 240px;
+  height: 46px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.inputAge {
+  width: 55px;
+}
+
+.select option {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.titleDescription {
+  margin: 15px 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.7);
+}
+
+.boxLevelDescription {
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 300px;
+  height: 100px;
+  overflow-y: scroll;
+  background-color: #f0eff4;
+}
+
+.subparagraphs {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.paragraph {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.01em;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.buttonSubmit {
+  margin-top: 40px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  /* width: 116px; */
+  height: 46px;
+  background-color: #2563eb;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+
+  &:hover {
+    background-color: #1d51c1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 40px;
+    width: 648px;
+  }
+
+  .closeButton {
+    top: 40px;
+    left: 580px;
+  }
+
+  .titleSetting {
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .headlines {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .radioText {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .boxUserData {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .input {
+    padding: 16px;
+    width: 568px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    &::placeholder {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+
+  .boxSelect {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .select {
+    padding: 16px;
+    width: 340px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .inputAge {
+    width: 65px;
+  }
+
+  .titleDescription {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .boxLevelDescription {
+    border-radius: 15px;
+    padding: 15px;
+    width: 500px;
+    height: 130px;
+    overflow-y: scroll;
+  }
+
+  .subparagraphs {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    line-height: 1.28;
+  }
+
+  .buttonSubmit {
+    padding: 16px 50px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .modal {
+    width: 920px;
+  }
+
+  .closeButton {
+    left: 852px;
+  }
+
+  .input {
+    width: 400px;
+    height: 56px;
+  }
+
+  .boxSelect {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .select {
+    box-sizing: border-box;
+    border: 1px solid rgba(47, 47, 47, 0.15);
+    border-radius: 15px;
+    width: 320px;
+    height: 56px;
+  }
+
+  .inputAge {
+    width: 65px;
+  }
+
+  .titleDescription {
+    margin: 20px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 400px;
+  }
+
+  .boxLevelDescription {
+    width: 400px;
+    height: 130px;
+  }
+}
