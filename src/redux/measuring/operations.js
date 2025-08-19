@@ -64,7 +64,6 @@ export const oneDayRequest = createAsyncThunk(
 export const oneMonthRequest = createAsyncThunk(
   "news/oneMonth",
   async (oneMonth, thunkAPI) => {
-    console.log(oneMonth);
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
@@ -106,17 +105,17 @@ export const sixMonthRequest = createAsyncThunk(
 export const deleteMeasuringRequest = createAsyncThunk(
   "news/deleteMeasuring",
   async (id, thunkAPI) => {
-    console.log(id);
+    // console.log(id);
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (token) {
         setAuthHeader(token);
       }
-      const data = await axios.get(
+      const data = await axios.delete(
         `/api/measurements/delete-measurement/${id}`
       );
-      console.log(data.data);
+      console.log(data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

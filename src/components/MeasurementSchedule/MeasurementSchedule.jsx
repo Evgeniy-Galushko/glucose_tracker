@@ -31,7 +31,7 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
     // console.log(oneMonth);
   }
 
-  const day = new Date();
+  // const day = new Date();
 
   // const newMonth = Object.values(
   //   oneMonth.reduce((month, item) => {

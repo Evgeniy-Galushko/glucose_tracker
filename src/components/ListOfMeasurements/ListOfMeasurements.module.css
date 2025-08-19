@@ -1,0 +1,62 @@
+.oneCart {
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 18px 14px;
+}
+
+.boxOneCart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  width: 200px;
+  height: 62px;
+}
+
+.boxIndicators {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sugarLevel {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  color: #323f47;
+}
+
+.boxTime {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.time {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(47, 47, 47, 0.6);
+}
+
+.buttonDelete {
+  border: none;
+  background-color: inherit;
+
+  &:disabled {
+    cursor: default;
+    fill: red;
+  }
+}
+
+.iconDisabled {
+  fill: #ff6050;
+}
+
+.icon {
+  fill: none;
+}

@@ -1,4 +1,4 @@
-.logOutModal {
+.modalDelete {
   box-sizing: border-box;
   position: relative;
   width: 344px;
@@ -11,10 +11,10 @@
   background-color: inherit;
   position: absolute;
   top: 20px;
-  left: 294px;
+  left: 293px;
 }
 
-.titleModalLogOut {
+.titleModalDelete {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -26,7 +26,7 @@
   margin-bottom: 16px;
 }
 
-.paragraphModalLogOut {
+.paragraphModalDelete {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -76,7 +76,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .logOutModal {
+  .modalDelete {
     width: 516px;
     height: 244px;
     padding: 40px;
@@ -86,14 +86,14 @@
     left: 468px;
   }
 
-  .titleModalLogOut {
+  .titleModalDelete {
     font-size: 28px;
     line-height: 1.14;
 
     margin-bottom: 24px;
   }
 
-  .paragraphModalLogOut {
+  .paragraphModalDelete {
     font-size: 18px;
     line-height: 1.33;
 

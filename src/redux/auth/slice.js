@@ -25,11 +25,17 @@ const authSlise = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(registrationRequest.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(registrationRequest.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
         state.user.email = action.payload.email;
         state.token = action.payload.accessToken;
         state.isLoading = false;
+      })
+      .addCase(loginRequest.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(loginRequest.fulfilled, (state, action) => {
         state.user.name = action.payload.name;
@@ -55,22 +61,24 @@ const authSlise = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       })
-      // .addCase(userUpdatingRequest.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(userUpdatingRequest.fulfilled, (state, action) => {
-      //   state.user.name = action.payload.name;
-      //   state.user.email = action.payload.email;
-      //   state.user.age = action.payload.age;
-      //   state.user.weight = action.payload.weight;
-      //   state.user.height = action.payload.height;
-      //   state.isLoading = false;
-      //   state.error = null;
-      // })
-      // .addCase(userUpdatingRequest.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.error = action.payload;
-      // })
+      .addCase(userUpdatingRequest.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(userUpdatingRequest.fulfilled, (state, action) => {
+        state.user.name = action.payload.name;
+        state.user.email = action.payload.email;
+        state.user.age = action.payload.age;
+        state.user.weight = action.payload.weight;
+        state.user.height = action.payload.height;
+        state.user.gender = action.payload.gender;
+        state.user.bloodSugarNorm = action.payload.bloodSugarNorm;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(userUpdatingRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addCase(signoutRequest.fulfilled, (state) => {
         state.user = {
           name: null,

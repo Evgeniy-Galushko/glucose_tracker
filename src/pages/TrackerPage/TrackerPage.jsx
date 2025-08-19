@@ -4,13 +4,18 @@ import MeasurementSchedule from "../../components/MeasurementSchedule/Measuremen
 import s from "./TrackerPage.module.css";
 import { selectToken, selectUser } from "../../redux/auth/selectors.js";
 import { useEffect, useState } from "react";
-import { userInformRequest } from "../../redux/auth/operations.js";
+import {
+  signoutRequest,
+  userInformRequest,
+} from "../../redux/auth/operations.js";
 import { useNavigate } from "react-router-dom";
 import {
   oneDayRequest,
   oneMonthRequest,
 } from "../../redux/measuring/operations.js";
 import UserSettingsModal from "../../components/UserSettingsModal/UserSettingsModal.jsx";
+import LogOutModal from "../../components/LogOutModal/LogOutModal.jsx";
+import DeleteMeasurementModal from "../../components/DeleteMeasurementModal/DeleteMeasurementModal.jsx";
 
 export default function TrackerPage() {
   const [windowSize, setWindowSize] = useState({
@@ -20,15 +25,27 @@ export default function TrackerPage() {
   const [screenSize, setScreenSize] = useState(null);
   const [graphHeights, setGraphHeights] = useState(null);
   const [userSettingsModal, setUserSettingsModal] = useState(false);
+  const [modalLogOut, setModalLogOut] = useState(false);
+
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
   // console.log(userInformation);
 
   useEffect(() => {
+    const year = new Date().getFullYear();
+    const month = new Date().getMonth() + 1;
+    const day = new Date().getDate();
+
     dispatch(userInformRequest());
     dispatch(oneMonthRequest("2025-08"));
-    dispatch(oneDayRequest("2025-08-15"));
+    dispatch(
+      oneDayRequest(
+        `${year}-${month.toString().padStart(2, "0")}-${day
+          .toString()
+          .padStart(2, "0")}`
+      )
+    );
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -51,10 +68,19 @@ export default function TrackerPage() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, windowSize.width]);
+  }, [dispatch, windowSize.width, userInformation]);
 
   const handleCloseUserSettingsModal = () => {
     setUserSettingsModal(false);
+  };
+
+  const handleCloseModalLogOut = () => {
+    setModalLogOut(false);
+  };
+
+  const handleLogOut = () => {
+    dispatch(signoutRequest());
+    setModalLogOut(false);
   };
 
   return (
@@ -62,7 +88,11 @@ export default function TrackerPage() {
       <UserSettingsModal
         openModal={userSettingsModal}
         handleCloseUserSettingsModal={handleCloseUserSettingsModal}
-        userSettingsModal={userSettingsModal}
+      />
+      <LogOutModal
+        handleLogOut={handleLogOut}
+        openModal={modalLogOut}
+        handleCloseModalLogOut={handleCloseModalLogOut}
       />
       <ul className={s.tracker}>
         <li className={s.boxTracker}>
@@ -72,7 +102,10 @@ export default function TrackerPage() {
           />
         </li>
         <li className={s.boxTracker}>
-          <DetailedInfo setUserSettingsModal={setUserSettingsModal} />
+          <DetailedInfo
+            setUserSettingsModal={setUserSettingsModal}
+            setModalLogOut={setModalLogOut}
+          />
         </li>
       </ul>
     </section>

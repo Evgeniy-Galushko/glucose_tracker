@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./DetailedInfo.module.css";
-import { signoutRequest } from "../../redux/auth/operations.js";
 import { selectToken, selectUser } from "../../redux/auth/selectors.js";
 import { useNavigate } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
@@ -8,31 +7,47 @@ import { FiLogOut } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa6";
 
 import sprite from "../../img/icon-sprite.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DeleteMeasurementModal from "../DeleteMeasurementModal/DeleteMeasurementModal.jsx";
+import ListOfMeasurements from "../ListOfMeasurements/ListOfMeasurements.jsx";
+import { selectOneDay } from "../../redux/measuring/selectors.js";
 
-export default function DetailedInfo({ setUserSettingsModal }) {
-  const dispatch = useDispatch();
+export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
+  const [modalMeasurement, setModalMeasurement] = useState(false);
+  const [idDelete, setIdDelete] = useState("");
   const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+  const oneDay = useSelector(selectOneDay);
 
   useEffect(() => {
     if (!token) {
       navigate("/");
     }
-  }, [navigate, token]);
+  }, [navigate, token, oneDay]);
 
   // console.log(token);
-  const handleLogOut = () => {
-    dispatch(signoutRequest());
-  };
 
   const handleOpenUserSettingsModal = () => {
     setUserSettingsModal(true);
   };
 
+  const handleOpenModalLogOut = () => {
+    setModalLogOut(true);
+  };
+
+  const handleCloseModalMeasurement = () => {
+    setModalMeasurement(false);
+  };
+
   return (
     <>
+      <DeleteMeasurementModal
+        idDelete={idDelete}
+        openModal={modalMeasurement}
+        handleCloseModalMeasurement={handleCloseModalMeasurement}
+      />
       <h2 className={s.titleName}>
         Привет, <span className={s.name}>{user.name}</span>
       </h2>
@@ -50,7 +65,7 @@ export default function DetailedInfo({ setUserSettingsModal }) {
           <button
             className={s.buttonNavigate}
             type="button"
-            onClick={handleLogOut}
+            onClick={handleOpenModalLogOut}
           >
             <FiLogOut size={16} /> Выход
           </button>
@@ -69,7 +84,13 @@ export default function DetailedInfo({ setUserSettingsModal }) {
           </button>
         </li>
       </ul>
-      <ul></ul>
+      <ul className={s.listOfMeasurements}>
+        <ListOfMeasurements
+          setIdDelete={setIdDelete}
+          oneDay={oneDay}
+          setModalMeasurement={setModalMeasurement}
+        />
+      </ul>
     </>
   );
 }

@@ -39,7 +39,7 @@ export const loginRequest = createAsyncThunk(
 );
 
 export const userInformRequest = createAsyncThunk(
-  "auth/userUpdating",
+  "auth/userInform",
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
@@ -59,15 +59,24 @@ export const userInformRequest = createAsyncThunk(
 export const userUpdatingRequest = createAsyncThunk(
   "auth/userUpdating",
   async (userUpdate, thunkAPI) => {
-    const { age, weight, height, name } = userUpdate;
-    console.log(age, weight, height, name);
+    const { age, bloodSugarNorm, gender, weight, height, name } = userUpdate;
+    // console.log(age, bloodSugarNorm, gender, weight, height, name);
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
       if (token) {
         setAuthHeader(token);
       }
-      await axios.put("/api/user/updating", userUpdate);
+      const data = await axios.put("/api/user/updating", {
+        ...(age && { age }),
+        ...(bloodSugarNorm && { bloodSugarNorm }),
+        ...(gender && { gender }),
+        ...(weight && { weight }),
+        ...(height && { height }),
+        ...(name && { name }),
+      });
+      console.log(data.data.data);
+      return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

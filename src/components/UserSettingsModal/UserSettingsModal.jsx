@@ -4,14 +4,14 @@ import Modal from "react-modal";
 import { Field, Form, Formik } from "formik";
 import { useId } from "react";
 import { selectUser } from "../../redux/auth/selectors.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import rendersYear from "../../utils/rendersYear.js";
 import { clsx } from "clsx";
+import { userUpdatingRequest } from "../../redux/auth/operations.js";
 
 export default function UserSettingsModal({
   openModal,
   handleCloseUserSettingsModal,
-  userSettingsModal,
 }) {
   const genderIdMan = useId();
   const genderIdWoman = useId();
@@ -21,6 +21,7 @@ export default function UserSettingsModal({
   const nameId = useId();
   const bloodSugarNormId = useId();
   const userInformation = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const customStyles = {
     overlay: {
@@ -51,8 +52,8 @@ export default function UserSettingsModal({
     birthYear: "",
   };
 
-  const handleSubmit = (values, actions) => {
-    console.log(values);
+  const handleSubmit = async (values, actions) => {
+    dispatch(userUpdatingRequest(values));
   };
 
   // console.log(userInformation);
