@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import DeleteMeasurementModal from "../DeleteMeasurementModal/DeleteMeasurementModal.jsx";
 import ListOfMeasurements from "../ListOfMeasurements/ListOfMeasurements.jsx";
 import { selectOneDay } from "../../redux/measuring/selectors.js";
+import Calendar from "../Calendar/Calendar.jsx";
 
 export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
   const [modalMeasurement, setModalMeasurement] = useState(false);
@@ -91,6 +92,7 @@ export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
           setModalMeasurement={setModalMeasurement}
         />
       </ul>
+      <Calendar />
     </>
   );
 }
