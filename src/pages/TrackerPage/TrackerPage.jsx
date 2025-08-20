@@ -30,15 +30,13 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
-  // console.log(userInformation);
-
   useEffect(() => {
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
 
     dispatch(userInformRequest());
-    dispatch(oneMonthRequest("2025-08"));
+    dispatch(oneMonthRequest(`${year}-${month.toString().padStart(2, "0")}`));
     dispatch(
       oneDayRequest(
         `${year}-${month.toString().padStart(2, "0")}-${day
@@ -62,7 +60,7 @@ export default function TrackerPage() {
       setGraphHeights(250);
     }
     if (windowSize.width >= 1440) {
-      setScreenSize(640);
+      setScreenSize(590);
       setGraphHeights(300);
     }
 
@@ -101,7 +99,7 @@ export default function TrackerPage() {
             graphHeights={graphHeights}
           />
         </li>
-        <li className={s.boxTracker}>
+        <li className={s.boxDetailed}>
           <DetailedInfo
             setUserSettingsModal={setUserSettingsModal}
             setModalLogOut={setModalLogOut}

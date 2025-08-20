@@ -84,7 +84,7 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  overflow-x: auto;
+  overflow-x: scroll;
   margin-top: 24px;
   scrollbar-color: #2563eb #f0eff4;
 
@@ -94,7 +94,22 @@
     width: 0;
   } */
 
+  &::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f0eff4;
+  }
+
   &::-webkit-scrollbar-button {
     display: none;
+    width: 0;
+    height: 0;
   }
 }

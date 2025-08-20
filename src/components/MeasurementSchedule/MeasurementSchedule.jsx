@@ -26,11 +26,6 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
   const oneDay = useSelector(selectOneDay);
   const oneMonth = useSelector(selectOneMonth);
 
-  if (oneDay) {
-    // console.log(oneDay);
-    // console.log(oneMonth);
-  }
-
   // const day = new Date();
 
   // const newMonth = Object.values(
