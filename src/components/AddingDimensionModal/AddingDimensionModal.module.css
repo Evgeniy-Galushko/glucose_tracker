@@ -1,0 +1,44 @@
+.modalAddingDimension {
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px 20px;
+  /* height: 100vh; */
+  /* border-radius: 15px; */
+  width: 343px;
+  overflow-y: auto;
+  /* overflow-y: hidden; */
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  left: 293px;
+  border: none;
+  background-color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  .modalAddingDimension {
+    padding: 40px;
+    width: 648px;
+  }
+
+  .closeButton {
+    top: 40px;
+    left: 580px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .modalAddingDimension {
+    width: 920px;
+  }
+
+  .closeButton {
+    left: 852px;
+  }
+}

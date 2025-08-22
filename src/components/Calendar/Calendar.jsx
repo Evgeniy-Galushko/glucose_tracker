@@ -4,7 +4,7 @@ import { CgChevronLeft } from "react-icons/cg";
 import { CgChevronRight } from "react-icons/cg";
 import clsx from "clsx";
 
-export default function Calendar() {
+export default function Calendar({ setSelectedDay, setSelectedMonth }) {
   const [numberOfDaysInAMonth, setNumberOfDaysInAMonth] = useState(() => {
     const day = new Date(
       new Date().getFullYear(),
@@ -25,45 +25,57 @@ export default function Calendar() {
   const [dayOfMonth, setDayOfMonth] = useState("");
   const [currentВate, setCurrentDate] = useState(new Date().getDate());
 
-  console.log(number);
+  // console.log(`${year}-${number.toString().padStart(2, "0")}`);
 
   useEffect(() => {
     switch (number) {
       case 1:
-        setMonth("January");
+        // setMonth("January");
+        setMonth("Январь");
         break;
       case 2:
-        setMonth("February");
+        // setMonth("February");
+        setMonth("Февраль");
         break;
       case 3:
-        setMonth("March");
+        // setMonth("March");
+        setMonth("Март");
         break;
       case 4:
-        setMonth("April");
+        // setMonth("April");
+        setMonth("Апрель");
         break;
       case 5:
-        setMonth("May");
+        // setMonth("May");
+        setMonth("Май");
         break;
       case 6:
-        setMonth("June");
+        // setMonth("June");
+        setMonth("Июнь");
         break;
       case 7:
-        setMonth("July");
+        // setMonth("July");
+        setMonth("Июль");
         break;
       case 8:
-        setMonth("August");
+        // setMonth("August");
+        setMonth("Август");
         break;
       case 9:
-        setMonth("September");
+        // setMonth("September");
+        setMonth("Сентябрь");
         break;
       case 10:
-        setMonth("October");
+        // setMonth("October");
+        setMonth("Октябрь");
         break;
       case 11:
-        setMonth("November");
+        // setMonth("November");
+        setMonth("Ноябрь");
         break;
       case 12:
-        setMonth("December");
+        // setMonth("December");
+        setMonth("Декабрь");
         break;
     }
 
@@ -74,7 +86,8 @@ export default function Calendar() {
     }
 
     setNumberOfDaysInAMonth(days);
-  }, [number, year]);
+    setSelectedMonth(`${year}-${number.toString().padStart(2, "0")}`);
+  }, [number, year, setSelectedMonth]);
 
   const handleClickDay = (e) => {
     const form = e.target.innerText;
@@ -83,9 +96,12 @@ export default function Calendar() {
         .toString()
         .padStart(2, "0")}`
     );
+    setSelectedDay(
+      `${year}-${number.toString().padStart(2, "0")}-${form
+        .toString()
+        .padStart(2, "0")}`
+    );
   };
-
-  console.log(dayOfMonth);
 
   const handleClickForward = () => {
     if (number >= 1) {
@@ -158,17 +174,23 @@ export default function Calendar() {
   const months = new Date().getMonth() + 1;
   const days = new Date().getDate();
 
+  console.log();
+
   return (
     <div className={s.boxCalendar}>
       <ul className={s.titleCalendar}>
         <li>
-          <h3>{dayOfMonth}</h3>
+          <h3 className={s.titleMonth}>
+            {dayOfMonth.length === 0
+              ? days + " " + month
+              : dayOfMonth.slice(8, 10) + " " + month}
+          </h3>
         </li>
         <li className={s.boxButton}>
           <button className={s.buttonArrows} onClick={handleClickBack}>
             <CgChevronLeft size={18} />
           </button>
-          <p>
+          <p className={s.monthYear}>
             {month} {year}
           </p>
           {/* <p></p> */}
@@ -197,6 +219,14 @@ export default function Calendar() {
                       .padStart(2, "0")}` && s.currentDay
                 )}
                 onClick={handleClickDay}
+                disabled={
+                  `${years}-${number.toString().padStart(2, "0")}-${day
+                    .toString()
+                    .padStart(2, "0")}` >
+                  `${years}-${months.toString().padStart(2, "0")}-${days
+                    .toString()
+                    .padStart(2, "0")}`
+                }
               >
                 {day}
               </button>

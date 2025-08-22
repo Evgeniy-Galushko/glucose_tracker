@@ -16,6 +16,7 @@ import {
 import UserSettingsModal from "../../components/UserSettingsModal/UserSettingsModal.jsx";
 import LogOutModal from "../../components/LogOutModal/LogOutModal.jsx";
 import DeleteMeasurementModal from "../../components/DeleteMeasurementModal/DeleteMeasurementModal.jsx";
+import AddingDimensionModal from "../../components/AddingDimensionModal/AddingDimensionModal.jsx";
 
 export default function TrackerPage() {
   const [windowSize, setWindowSize] = useState({
@@ -26,24 +27,24 @@ export default function TrackerPage() {
   const [graphHeights, setGraphHeights] = useState(null);
   const [userSettingsModal, setUserSettingsModal] = useState(false);
   const [modalLogOut, setModalLogOut] = useState(false);
-
+  const [addingDimensionModal, setAddingDimensionModal] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(
+    `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}-${new Date().getDate().toString().padStart(2, "0")}`
+  );
+  const [selectedMonth, setSelectedMonth] = useState(
+    `${new Date().getFullYear()}-${(new Date().getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}`
+  );
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
   useEffect(() => {
-    const year = new Date().getFullYear();
-    const month = new Date().getMonth() + 1;
-    const day = new Date().getDate();
-
     dispatch(userInformRequest());
-    dispatch(oneMonthRequest(`${year}-${month.toString().padStart(2, "0")}`));
-    dispatch(
-      oneDayRequest(
-        `${year}-${month.toString().padStart(2, "0")}-${day
-          .toString()
-          .padStart(2, "0")}`
-      )
-    );
+    dispatch(oneMonthRequest(selectedMonth));
+    dispatch(oneDayRequest(selectedDay));
     const handleResize = () => {
       setWindowSize({
         width: window.innerWidth,
@@ -66,7 +67,7 @@ export default function TrackerPage() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, windowSize.width, userInformation]);
+  }, [dispatch, windowSize.width, userInformation, selectedDay, selectedMonth]);
 
   const handleCloseUserSettingsModal = () => {
     setUserSettingsModal(false);
@@ -81,8 +82,16 @@ export default function TrackerPage() {
     setModalLogOut(false);
   };
 
+  const handCloseleAddingDimensionModal = () => {
+    setAddingDimensionModal(false);
+  };
+
   return (
     <section className={s.sectionTracker}>
+      <AddingDimensionModal
+        openModal={addingDimensionModal}
+        handCloseleAddingDimensionModal={handCloseleAddingDimensionModal}
+      />
       <UserSettingsModal
         openModal={userSettingsModal}
         handleCloseUserSettingsModal={handleCloseUserSettingsModal}
@@ -101,6 +110,9 @@ export default function TrackerPage() {
         </li>
         <li className={s.boxDetailed}>
           <DetailedInfo
+            setAddingDimensionModal={setAddingDimensionModal}
+            setSelectedDay={setSelectedDay}
+            setSelectedMonth={setSelectedMonth}
             setUserSettingsModal={setUserSettingsModal}
             setModalLogOut={setModalLogOut}
           />

@@ -14,11 +14,22 @@
   margin-bottom: 24px;
 }
 
+.titleMonth {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+  text-transform: lowercase;
+}
+
 .boxButton {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 170px;
 }
 
 .buttonArrows {
@@ -27,6 +38,16 @@
   border-radius: 50px;
   cursor: pointer;
   border: none;
+}
+
+.monthYear {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
 }
 
 .calendar {
@@ -60,8 +81,14 @@
   color: #323f47;
 
   &:hover {
-    background-color: aqua;
+    background-color: #4bb3eb;
     color: orangered;
+  }
+
+  &:disabled {
+    background-color: #cacaca89;
+    color: #8e8e8f;
+    cursor: default;
   }
 }
 

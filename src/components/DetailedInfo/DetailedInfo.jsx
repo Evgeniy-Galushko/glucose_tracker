@@ -13,7 +13,13 @@ import ListOfMeasurements from "../ListOfMeasurements/ListOfMeasurements.jsx";
 import { selectOneDay } from "../../redux/measuring/selectors.js";
 import Calendar from "../Calendar/Calendar.jsx";
 
-export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
+export default function DetailedInfo({
+  setUserSettingsModal,
+  setModalLogOut,
+  setSelectedDay,
+  setSelectedMonth,
+  setAddingDimensionModal,
+}) {
   const [modalMeasurement, setModalMeasurement] = useState(false);
   const [idDelete, setIdDelete] = useState("");
   const navigate = useNavigate();
@@ -40,6 +46,10 @@ export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
 
   const handleCloseModalMeasurement = () => {
     setModalMeasurement(false);
+  };
+
+  const handleOpenAddingDimensionModal = () => {
+    setAddingDimensionModal(true);
   };
 
   return (
@@ -73,11 +83,13 @@ export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
         </li>
       </ul>
       <ul className={s.boxMonthAdd}>
+        <li>{/* <p>Месяц</p> */}</li>
         <li>
-          <p>Месяц</p>
-        </li>
-        <li>
-          <button type="button" className={s.addButton}>
+          <button
+            type="button"
+            className={s.addButton}
+            onClick={handleOpenAddingDimensionModal}
+          >
             <span className={s.plusAdd}>
               <FaPlus size={10} />
             </span>{" "}
@@ -92,7 +104,10 @@ export default function DetailedInfo({ setUserSettingsModal, setModalLogOut }) {
           setModalMeasurement={setModalMeasurement}
         />
       </ul>
-      <Calendar />
+      <Calendar
+        setSelectedDay={setSelectedDay}
+        setSelectedMonth={setSelectedMonth}
+      />
     </>
   );
 }
