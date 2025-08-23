@@ -4,7 +4,11 @@ import { CgChevronLeft } from "react-icons/cg";
 import { CgChevronRight } from "react-icons/cg";
 import clsx from "clsx";
 
-export default function Calendar({ setSelectedDay, setSelectedMonth }) {
+export default function Calendar({
+  setSelectedDay,
+  setSelectedMonth,
+  setChartTitle,
+}) {
   const [numberOfDaysInAMonth, setNumberOfDaysInAMonth] = useState(() => {
     const day = new Date(
       new Date().getFullYear(),
@@ -24,6 +28,10 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
   const [year, setYear] = useState(new Date().getFullYear());
   const [dayOfMonth, setDayOfMonth] = useState("");
   const [currentВate, setCurrentDate] = useState(new Date().getDate());
+
+  const years = new Date().getFullYear();
+  const months = new Date().getMonth() + 1;
+  const dayTitle = new Date().getDate();
 
   // console.log(`${year}-${number.toString().padStart(2, "0")}`);
 
@@ -87,7 +95,12 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
 
     setNumberOfDaysInAMonth(days);
     setSelectedMonth(`${year}-${number.toString().padStart(2, "0")}`);
-  }, [number, year, setSelectedMonth]);
+    setChartTitle(
+      dayOfMonth.length === 0
+        ? dayTitle + " " + month
+        : dayOfMonth.slice(8, 10) + " " + month
+    );
+  }, [number, year, setSelectedMonth, setChartTitle, dayOfMonth]);
 
   const handleClickDay = (e) => {
     const form = e.target.innerText;
@@ -170,10 +183,6 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
 
   // console.log(new Date("2025-03-17T14:48:16.794Z").getM());
 
-  const years = new Date().getFullYear();
-  const months = new Date().getMonth() + 1;
-  const days = new Date().getDate();
-
   console.log();
 
   return (
@@ -182,7 +191,7 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
         <li>
           <h3 className={s.titleMonth}>
             {dayOfMonth.length === 0
-              ? days + " " + month
+              ? dayTitle + " " + month
               : dayOfMonth.slice(8, 10) + " " + month}
           </h3>
         </li>
@@ -214,7 +223,7 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
                   `${years}-${number.toString().padStart(2, "0")}-${day
                     .toString()
                     .padStart(2, "0")}` ===
-                    `${years}-${months.toString().padStart(2, "0")}-${days
+                    `${years}-${months.toString().padStart(2, "0")}-${dayTitle
                       .toString()
                       .padStart(2, "0")}` && s.currentDay
                 )}
@@ -223,7 +232,7 @@ export default function Calendar({ setSelectedDay, setSelectedMonth }) {
                   `${years}-${number.toString().padStart(2, "0")}-${day
                     .toString()
                     .padStart(2, "0")}` >
-                  `${years}-${months.toString().padStart(2, "0")}-${days
+                  `${years}-${months.toString().padStart(2, "0")}-${dayTitle
                     .toString()
                     .padStart(2, "0")}`
                 }

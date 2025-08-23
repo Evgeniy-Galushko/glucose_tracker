@@ -10,6 +10,7 @@ import {
 } from "../../redux/auth/operations.js";
 import { useNavigate } from "react-router-dom";
 import {
+  addMeasuringRequest,
   oneDayRequest,
   oneMonthRequest,
 } from "../../redux/measuring/operations.js";
@@ -38,8 +39,12 @@ export default function TrackerPage() {
       .toString()
       .padStart(2, "0")}`
   );
+  const [chartTitle, setChartTitle] = useState("");
+  const [addingDimension, setAddingDimension] = useState({});
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
+
+  console.log(addingDimension);
 
   useEffect(() => {
     dispatch(userInformRequest());
@@ -67,7 +72,14 @@ export default function TrackerPage() {
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [dispatch, windowSize.width, userInformation, selectedDay, selectedMonth]);
+  }, [
+    dispatch,
+    windowSize.width,
+    userInformation,
+    selectedDay,
+    selectedMonth,
+    addingDimension,
+  ]);
 
   const handleCloseUserSettingsModal = () => {
     setUserSettingsModal(false);
@@ -89,6 +101,7 @@ export default function TrackerPage() {
   return (
     <section className={s.sectionTracker}>
       <AddingDimensionModal
+        setAddingDimension={setAddingDimension}
         openModal={addingDimensionModal}
         handCloseleAddingDimensionModal={handCloseleAddingDimensionModal}
       />
@@ -104,12 +117,15 @@ export default function TrackerPage() {
       <ul className={s.tracker}>
         <li className={s.boxTracker}>
           <MeasurementSchedule
+            chartTitle={chartTitle}
+            selectedDay={selectedDay}
             screenSize={screenSize}
             graphHeights={graphHeights}
           />
         </li>
         <li className={s.boxDetailed}>
           <DetailedInfo
+            setChartTitle={setChartTitle}
             setAddingDimensionModal={setAddingDimensionModal}
             setSelectedDay={setSelectedDay}
             setSelectedMonth={setSelectedMonth}

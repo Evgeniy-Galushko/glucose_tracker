@@ -268,6 +268,7 @@ input::-webkit-inner-spin-button {
 }
 
 .boxSelect {
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -294,6 +295,15 @@ input::-webkit-inner-spin-button {
 
 .inputAge {
   width: 55px;
+}
+
+.iconLabel {
+  position: absolute;
+  left: 210px;
+  top: 18px;
+  width: 8px;
+  height: 10px;
+  rotate: 90deg;
 }
 
 .select option {
@@ -432,6 +442,13 @@ input::-webkit-inner-spin-button {
     width: 65px;
   }
 
+  .iconLabel {
+    left: 305px;
+    top: 21px;
+    width: 15px;
+    height: 15px;
+  }
+
   .titleDescription {
     margin: 20px 0;
     font-size: 16px;
@@ -495,6 +512,13 @@ input::-webkit-inner-spin-button {
 
   .inputAge {
     width: 65px;
+  }
+
+  .iconLabel {
+    left: 285px;
+    top: 22px;
+    width: 15px;
+    height: 15px;
   }
 
   .titleDescription {

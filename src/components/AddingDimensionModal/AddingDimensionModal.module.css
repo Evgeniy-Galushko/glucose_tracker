@@ -21,24 +21,158 @@
   background-color: inherit;
 }
 
+.titleModal {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #323f47;
+
+  margin-bottom: 24px;
+}
+
+.boxFields {
+  position: relative;
+  display: flex;
+  /* flex-direction: column; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 24px;
+}
+
+.label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #323f47;
+}
+
+.input {
+  box-sizing: border-box;
+  border: 1px solid rgba(47, 47, 47, 0.15);
+  border-radius: 15px;
+  padding: 14px 16px;
+  width: 160px;
+  height: 46px;
+
+  appearance: none;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  color: #2f2f2f;
+}
+
+.iconLabel {
+  position: absolute;
+  left: 280px;
+  width: 8px;
+  height: 10px;
+  rotate: 90deg;
+}
+
+.errorMessage {
+  position: absolute;
+  left: 150px;
+  top: 47px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: #ef2447;
+}
+
+.buttomSubmit {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 40px;
+  height: 46px;
+  background-color: #2563eb;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #fff;
+
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #1d51c1;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .modalAddingDimension {
     padding: 40px;
-    width: 648px;
+    width: 580px;
   }
 
   .closeButton {
-    top: 40px;
-    left: 580px;
+    top: 20px;
+    left: 510px;
+  }
+
+  .titleModal {
+    width: 400px;
+    font-size: 28px;
+    line-height: 1.14;
+  }
+
+  .label {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .input {
+    width: 260px;
+    height: 56px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .iconLabel {
+    left: 470px;
+    width: 10px;
+    height: 12px;
+  }
+
+  .errorMessage {
+    left: 325px;
+    top: 58px;
+  }
+
+  .buttomSubmit {
+    padding: 18px 50px;
+    height: 60px;
+    background-color: #2563eb;
+
+    font-size: 16px;
+    line-height: 1.5;
+
+    margin-top: 20px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .modalAddingDimension {
+  /* .modalAddingDimension {
     width: 920px;
   }
 
   .closeButton {
     left: 852px;
-  }
+  } */
 }

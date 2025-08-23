@@ -22,7 +22,12 @@ import {
   Rectangle,
 } from "recharts";
 
-export default function MeasurementSchedule({ screenSize, graphHeights }) {
+export default function MeasurementSchedule({
+  screenSize,
+  graphHeights,
+  selectedDay,
+  chartTitle,
+}) {
   const oneDay = useSelector(selectOneDay);
   const oneMonth = useSelector(selectOneMonth);
 
@@ -54,7 +59,7 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
   return (
     <ul className={s.boxGraph}>
       <li>
-        <h2>За </h2>
+        <h2>За 1 выбранный день </h2>
         {/* <ResponsiveContainer width={500} height={300}>
           <LineChart
             width={500}
@@ -166,7 +171,7 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
         </ResponsiveContainer> */}
       </li>
       <li>
-        <h2>За текущий месяц</h2>
+        <h2>За выбранный месяц</h2>
         {oneMonth.length === 0 ? (
           <p>За выбранный месяц нет данных </p>
         ) : (

@@ -34,11 +34,11 @@ export default function DeleteMeasurementModal({
   };
 
   const handleDeleteCart = async () => {
-    dispatch(deleteMeasuringRequest(idDelete));
+    await dispatch(deleteMeasuringRequest(idDelete));
+
     const year = new Date().getFullYear();
     const month = new Date().getMonth() + 1;
     const day = new Date().getDate();
-
     dispatch(
       oneDayRequest(
         `${year}-${month.toString().padStart(2, "0")}-${day

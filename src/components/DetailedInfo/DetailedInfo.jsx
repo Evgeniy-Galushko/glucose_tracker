@@ -19,6 +19,7 @@ export default function DetailedInfo({
   setSelectedDay,
   setSelectedMonth,
   setAddingDimensionModal,
+  setChartTitle,
 }) {
   const [modalMeasurement, setModalMeasurement] = useState(false);
   const [idDelete, setIdDelete] = useState("");
@@ -34,7 +35,7 @@ export default function DetailedInfo({
     }
   }, [navigate, token, oneDay]);
 
-  // console.log(token);
+  console.log(oneDay.length);
 
   const handleOpenUserSettingsModal = () => {
     setUserSettingsModal(true);
@@ -92,7 +93,7 @@ export default function DetailedInfo({
           >
             <span className={s.plusAdd}>
               <FaPlus size={10} />
-            </span>{" "}
+            </span>
             Добавить измерение
           </button>
         </li>
@@ -105,6 +106,7 @@ export default function DetailedInfo({
         />
       </ul>
       <Calendar
+        setChartTitle={setChartTitle}
         setSelectedDay={setSelectedDay}
         setSelectedMonth={setSelectedMonth}
       />

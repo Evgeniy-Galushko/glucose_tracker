@@ -2,17 +2,25 @@ import s from "./AddingDimensionModal.module.css";
 import Modal from "react-modal";
 import sprite from "../../img/icon-sprite.svg";
 import clsx from "clsx";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import {
+  addMeasuringRequest,
+  oneDayRequest,
+} from "../../redux/measuring/operations.js";
 
 export default function AddingDimensionModal({
   openModal,
   handCloseleAddingDimensionModal,
+  setAddingDimension,
 }) {
   const dateId = useId();
   const timeId = useId();
   const measurementTimeId = useId();
   const measurementPeriodID = useId();
+  const dispatch = useDispatch();
 
   const customStyles = {
     overlay: {
@@ -41,16 +49,45 @@ export default function AddingDimensionModal({
       .getMinutes()
       .toString()
       .padStart(2, "0")}`,
+    measurementResult: "",
     measurementTime: "",
     // onAnEmptyStomach: "", // натощак
     // afterEating: "", // после еды
   };
 
-  const hendleSubmit = (values, actions) => {
-    console.log(values);
-  };
+  const pattern = Yup.object().shape({
+    date: Yup.string().required("Введите дату"),
+    time: Yup.string().required("Введите время"),
+    measurementResult: Yup.number().required("Введите результат измерения"),
+    measurementTime: Yup.string().required("Введите период измерения"),
+  });
 
-  console.log();
+  const hendleSubmit = async (values, actions) => {
+    if (values.measurementTime === "после еды") {
+      await dispatch(
+        addMeasuringRequest({
+          date: values.date,
+          time: values.time,
+          measurementTime: values.measurementTime,
+          afterEating: values.measurementResult,
+        })
+      );
+      dispatch(oneDayRequest(values.date));
+    }
+    if (values.measurementTime === "натощак") {
+      await dispatch(
+        addMeasuringRequest({
+          date: values.date,
+          time: values.time,
+          measurementTime: values.measurementTime,
+          onAnEmptyStomach: values.measurementResult,
+        })
+      );
+      dispatch(oneDayRequest(values.date));
+    }
+
+    handCloseleAddingDimensionModal();
+  };
 
   return (
     <Modal
@@ -69,36 +106,96 @@ export default function AddingDimensionModal({
             <use href={`${sprite}#icon-close`} />
           </svg>
         </button>
-        <h3 className={s.titleModalDelete}>
+        <h3 className={s.titleModal}>
           Добавить новое измерение уровня сахара в крови.
         </h3>
 
-        <Formik initialValues={initialValues} onSubmit={hendleSubmit}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={hendleSubmit}
+          validationSchema={pattern}
+        >
           {(setFieldValue, values) => (
             <Form>
-              <label htmlFor={dateId}>Дата измерения</label>
-              <Field
-                id={dateId}
-                name="date"
-                required
-                // type="date"
-                type="text"
-              />
-              <label htmlFor={timeId}>Время измерения</label>
-              <Field id={timeId} name="time" type="time" required />
-
-              <label htmlFor={measurementTimeId}>Результат измерения</label>
-              <Field
-                id={measurementTimeId}
-                // name="measurementTime"
-                type="number"
-              />
-              <label htmlFor={measurementPeriodID}>Период измерения</label>
-              <Field as="select" name="measurementTime">
-                <option value="onAnEmptyStomach">натощак</option>
-                <option value="afterEating">после еды</option>
-              </Field>
-              <button type="submit">submit</button>
+              <div className={s.boxFields}>
+                <label className={s.label} htmlFor={dateId}>
+                  Дата измерения:
+                </label>
+                <Field
+                  className={s.input}
+                  id={dateId}
+                  name="date"
+                  required
+                  type="date"
+                  // type="text"
+                />
+                <ErrorMessage
+                  component="span"
+                  name="date"
+                  className={s.errorMessage}
+                />
+              </div>
+              <div className={s.boxFields}>
+                <label className={s.label} htmlFor={timeId}>
+                  Время измерения:
+                </label>
+                <Field
+                  className={s.input}
+                  id={timeId}
+                  name="time"
+                  type="time"
+                  required
+                />
+                <ErrorMessage
+                  component="span"
+                  name="time"
+                  className={s.errorMessage}
+                />
+              </div>
+              <div className={s.boxFields}>
+                <label className={s.label} htmlFor={measurementTimeId}>
+                  Результат измерения:
+                </label>
+                <Field
+                  className={s.input}
+                  id={measurementTimeId}
+                  name="measurementResult"
+                  type="number"
+                  required
+                />
+                <ErrorMessage
+                  component="span"
+                  name="measurementResult"
+                  className={s.errorMessage}
+                />
+              </div>
+              <div className={s.boxFields}>
+                <label className={s.label} htmlFor={measurementPeriodID}>
+                  Период измерения:
+                </label>
+                <Field
+                  className={s.input}
+                  as="select"
+                  name="measurementTime"
+                  id={measurementPeriodID}
+                  required
+                >
+                  <option>выбрать период</option>
+                  <option value="натощак">натощак</option>
+                  <option value="после еды">после еды</option>
+                </Field>
+                <svg className={clsx(s.iconLabel)}>
+                  <use href={`${sprite}#icon-arrow-left`} />
+                </svg>
+                <ErrorMessage
+                  name="measurementTime"
+                  component="span"
+                  className={s.errorMessage}
+                />
+              </div>
+              <button className={s.buttomSubmit} type="submit">
+                Сохранить
+              </button>
             </Form>
           )}
         </Formik>

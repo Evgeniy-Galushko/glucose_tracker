@@ -180,6 +180,9 @@ export default function UserSettingsModal({
                       placeholder={userInformation.age || 0}
                       readOnly
                     />
+                    <svg className={clsx(s.iconLabel)}>
+                      <use href={`${sprite}#icon-arrow-left`} />
+                    </svg>
                   </div>
                 </li>
                 <li className={s.boxInput}>
