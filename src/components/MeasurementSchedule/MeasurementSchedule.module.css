@@ -1,1 +1,27 @@
+.boxGraph {
+}
 
+.title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.11;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #323f47;
+  margin: 10px 0 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    font-size: 24px;
+    line-height: 1.29;
+    letter-spacing: -0.01em;
+
+    margin: 20px 0 30px 0;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}

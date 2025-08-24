@@ -96,3 +96,47 @@
   background-color: #00a6ff;
   color: #ffffff;
 }
+
+@media screen and (min-width: 768px) {
+  .titleCalendar {
+    padding: 0 30px;
+  }
+
+  .titleMonth {
+    font-size: 22px;
+    line-height: 1.14;
+  }
+
+  .boxButton {
+    width: 210px;
+  }
+
+  .buttonArrows {
+    width: 40px;
+    height: 40px;
+  }
+
+  .monthYear {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .calendar {
+    padding: 0px;
+    margin: 0 auto;
+    width: 580px;
+    height: 397px;
+    gap: 43px;
+  }
+
+  .buttonCalend {
+    width: 45px;
+    height: 45px;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+}

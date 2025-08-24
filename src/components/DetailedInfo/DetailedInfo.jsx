@@ -35,7 +35,7 @@ export default function DetailedInfo({
     }
   }, [navigate, token, oneDay]);
 
-  console.log(oneDay.length);
+  // console.log(oneDay.length);
 
   const handleOpenUserSettingsModal = () => {
     setUserSettingsModal(true);
@@ -60,29 +60,31 @@ export default function DetailedInfo({
         openModal={modalMeasurement}
         handleCloseModalMeasurement={handleCloseModalMeasurement}
       />
-      <h2 className={s.titleName}>
-        Привет, <span className={s.name}>{user.name}</span>
-      </h2>
-      <ul className={s.boxButton}>
-        <li>
-          <button
-            type="button"
-            className={s.buttonNavigate}
-            onClick={handleOpenUserSettingsModal}
-          >
-            <BsGear size={16} /> Параметр
-          </button>
-        </li>
-        <li>
-          <button
-            className={s.buttonNavigate}
-            type="button"
-            onClick={handleOpenModalLogOut}
-          >
-            <FiLogOut size={16} /> Выход
-          </button>
-        </li>
-      </ul>
+      <div className={s.boxNameAndSettings}>
+        <h2 className={s.titleName}>
+          Привет, <span className={s.name}>{user.name}</span>
+        </h2>
+        <ul className={s.boxButton}>
+          <li>
+            <button
+              type="button"
+              className={s.buttonNavigate}
+              onClick={handleOpenUserSettingsModal}
+            >
+              <BsGear size={16} /> Параметр
+            </button>
+          </li>
+          <li>
+            <button
+              className={s.buttonNavigate}
+              type="button"
+              onClick={handleOpenModalLogOut}
+            >
+              <FiLogOut size={16} /> Выход
+            </button>
+          </li>
+        </ul>
+      </div>
       <ul className={s.boxMonthAdd}>
         <li>{/* <p>Месяц</p> */}</li>
         <li>
@@ -92,7 +94,7 @@ export default function DetailedInfo({
             onClick={handleOpenAddingDimensionModal}
           >
             <span className={s.plusAdd}>
-              <FaPlus size={10} />
+              <FaPlus className={s.iconPluss} />
             </span>
             Добавить измерение
           </button>

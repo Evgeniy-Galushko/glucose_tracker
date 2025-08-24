@@ -31,35 +31,10 @@ export default function MeasurementSchedule({
   const oneDay = useSelector(selectOneDay);
   const oneMonth = useSelector(selectOneMonth);
 
-  // const day = new Date();
-
-  // const newMonth = Object.values(
-  //   oneMonth.reduce((month, item) => {
-  //     const day = new Date(item.date).getDate();
-  //     if (!month[day]) {
-  //       month[day] = { day, sum: 0, count: 0 };
-  //     }
-  //     const value = item.onAnEmptyStomach ?? item.afterEating ?? 0;
-  //     month[day].sum += value;
-  //     month[day].count += 1;
-  //     console.log(month[day]);
-  //     return month;
-  //   }, {})
-  // ).map(({ day, sum, count }) => ({
-  //   day,
-  //   averageDailyRate: (sum / count).toFixed(2),
-  // }));
-
-  // console.log(newMonth);
-
-  // console.log(day.getDate());
-  // console.log(day.getMonth() + 1);
-  // console.log(day.getFullYear());
-
   return (
     <ul className={s.boxGraph}>
       <li>
-        <h2>За 1 выбранный день </h2>
+        <h2 className={s.title}>За один выбранный день </h2>
         {/* <ResponsiveContainer width={500} height={300}>
           <LineChart
             width={500}
@@ -171,7 +146,7 @@ export default function MeasurementSchedule({
         </ResponsiveContainer> */}
       </li>
       <li>
-        <h2>За выбранный месяц</h2>
+        <h2 className={s.title}>За выбранный месяц</h2>
         {oneMonth.length === 0 ? (
           <p>За выбранный месяц нет данных </p>
         ) : (

@@ -44,7 +44,7 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
-  console.log(addingDimension);
+  // console.log(addingDimension);
 
   useEffect(() => {
     dispatch(userInformRequest());
