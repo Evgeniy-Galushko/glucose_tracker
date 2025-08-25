@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   addMeasuringRequest,
   oneDayRequest,
+  oneMonthRequest,
 } from "../../redux/measuring/operations.js";
 
 export default function AddingDimensionModal({
@@ -73,6 +74,7 @@ export default function AddingDimensionModal({
         })
       );
       dispatch(oneDayRequest(values.date));
+      dispatch(oneMonthRequest(values.date.slice(0, 7)));
     }
     if (values.measurementTime === "натощак") {
       await dispatch(
@@ -84,6 +86,7 @@ export default function AddingDimensionModal({
         })
       );
       dispatch(oneDayRequest(values.date));
+      dispatch(oneMonthRequest(values.date.slice(0, 7)));
     }
 
     handCloseleAddingDimensionModal();

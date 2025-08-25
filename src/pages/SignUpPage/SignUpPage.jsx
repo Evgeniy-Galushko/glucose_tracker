@@ -1,9 +1,15 @@
+import { useSelector } from "react-redux";
 import SignUpForm from "../../components/SignUpForm/SignUpForm.jsx";
 import s from "./SignUpPage.module.css";
+import { selectIsLoadingUser } from "../../redux/auth/selectors.js";
+import Loader from "../../components/Loader/Loader.jsx";
 
 export default function SignUpPage() {
+  const isLoading = useSelector(selectIsLoadingUser);
+
   return (
     <section className={s.signUpPage}>
+      {isLoading && <Loader />}
       <ul className={s.boxSignUpPage}>
         <li className={s.boxForm}>
           <SignUpForm />

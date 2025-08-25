@@ -43,6 +43,10 @@ const authSlise = createSlice({
         state.token = action.payload.accessToken;
         state.isLoading = false;
       })
+      .addCase(loginRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addCase(userInformRequest.pending, (state) => {
         state.isLoading = true;
       })

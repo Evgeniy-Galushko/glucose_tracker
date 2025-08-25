@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 // axios.defaults.baseURL = "https://blood-sugar-control-backend.onrender.com";
@@ -17,7 +18,9 @@ export const addMeasuringRequest = createAsyncThunk(
         setAuthHeader(token);
       }
       const data = await axios.post("/api/measurements/add", measuring);
-      console.log(data);
+      if (data.data.status === 201) {
+        toast.success("Измерение добавлено");
+      }
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -105,7 +108,6 @@ export const sixMonthRequest = createAsyncThunk(
 export const deleteMeasuringRequest = createAsyncThunk(
   "news/deleteMeasuring",
   async (id, thunkAPI) => {
-    // console.log(id);
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
@@ -116,6 +118,9 @@ export const deleteMeasuringRequest = createAsyncThunk(
         `/api/measurements/delete-measurement/${id}`
       );
       console.log(data);
+      if (data.status === 204) {
+        toast.success("Измерение удалено");
+      }
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

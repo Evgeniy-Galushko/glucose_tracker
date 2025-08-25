@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   deleteMeasuringRequest,
   oneDayRequest,
+  oneMonthRequest,
 } from "../../redux/measuring/operations.js";
 
 export default function DeleteMeasurementModal({
@@ -46,6 +47,8 @@ export default function DeleteMeasurementModal({
           .padStart(2, "0")}`
       )
     );
+
+    dispatch(oneMonthRequest(`${year}-${month.toString().padStart(2, "0")}`));
     handleCloseModalMeasurement();
   };
 

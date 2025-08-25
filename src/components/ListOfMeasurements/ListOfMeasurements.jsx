@@ -46,6 +46,11 @@ export default function ListOfMeasurements({
                     <li>
                       <p className={s.sugarLevel}>
                         {afterEating ?? onAnEmptyStomach ?? 0} ммоль/л
+                        <svg width={18} height={18}>
+                          <use
+                            href={`${sprite}#icon-green-circle-svgrepo-com`}
+                          />
+                        </svg>
                       </p>
                     </li>
                     <li>

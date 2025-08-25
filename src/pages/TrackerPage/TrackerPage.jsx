@@ -8,6 +8,7 @@ import {
   signoutRequest,
   userInformRequest,
 } from "../../redux/auth/operations.js";
+import { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {
   addMeasuringRequest,
@@ -100,6 +101,13 @@ export default function TrackerPage() {
 
   return (
     <section className={s.sectionTracker}>
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 3000,
+          style: {},
+        }}
+      />
       <AddingDimensionModal
         setAddingDimension={setAddingDimension}
         openModal={addingDimensionModal}
