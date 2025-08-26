@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://blood-sugar-control-backend.onrender.com";
 
@@ -75,7 +76,10 @@ export const userUpdatingRequest = createAsyncThunk(
         ...(height && { height }),
         ...(name && { name }),
       });
-      console.log(data.data.data);
+      // console.log(data.data.status);
+      if (data.data.status === 200) {
+        toast.success("Вы изменили свои данные");
+      }
       return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

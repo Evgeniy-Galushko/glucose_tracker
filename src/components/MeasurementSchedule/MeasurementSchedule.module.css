@@ -25,6 +25,99 @@
   margin: 100px 0;
 }
 
+.description {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.descriptionTitle {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+}
+
+.oneDescription {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.emptyStomach {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  background-color: #8884d8;
+}
+
+.emptyStomach::after {
+  right: -12px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: #8884d8;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.emptyStomach::before {
+  left: -12px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: #8884d8;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.afterEating {
+  display: block;
+  position: relative;
+  border-radius: 50px;
+  width: 10px;
+  height: 10px;
+  background-color: #74ac8aff;
+}
+
+.afterEating::before {
+  left: -12px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: #74ac8aff;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.afterEating::after {
+  right: -12px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  background-color: #74ac8aff;
+  content: "";
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 @media screen and (min-width: 768px) {
   .title {
     font-size: 24px;
@@ -39,6 +132,49 @@
     line-height: 1.33;
 
     margin: 125px 0;
+  }
+
+  .description {
+    gap: 35px;
+  }
+
+  .descriptionTitle {
+    font-size: 18px;
+    line-height: 1.33;
+  }
+
+  .oneDescription {
+    gap: 20px;
+  }
+
+  .emptyStomach {
+    width: 15px;
+    height: 15px;
+  }
+
+  .emptyStomach::after {
+    right: -16px;
+    width: 14px;
+  }
+
+  .emptyStomach::before {
+    left: -16px;
+    width: 14px;
+  }
+
+  .afterEating {
+    width: 15px;
+    height: 15px;
+  }
+
+  .afterEating::before {
+    left: -16px;
+    width: 14px;
+  }
+
+  .afterEating::after {
+    right: -16px;
+    width: 14px;
   }
 }
 

@@ -1,12 +1,24 @@
 import s from "./ListOfMeasurements.module.css";
 import sprite from "../../img/icon-sprite.svg";
+import { selectUser } from "../../redux/auth/selectors.js";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import SugarNorm from "../../utils/sugarNorm.js";
 
 export default function ListOfMeasurements({
   oneDay,
   setModalMeasurement,
   setIdDelete,
 }) {
+  // const [minSugar, setMinSugar] = useState(0);
+  // const [maxSugar, setMaxSugar] = useState(0);
+  // const [afterEatingSugar, setAfterEatingSugar] = useState(0);
+
+  const userInformation = useSelector(selectUser);
+  const { name, weight, height, bloodSugarNorm, age } = userInformation;
   if (!oneDay) return;
+
+  console.log(age);
 
   const handleOpenModalDelete = (id) => {
     setModalMeasurement(true);
@@ -33,6 +45,15 @@ export default function ListOfMeasurements({
           time,
           _id,
         }) => {
+          const minSugar = SugarNorm(measurementTime, age).minSugar;
+          const maxSugar = SugarNorm(measurementTime, age).maxSugar;
+          const afterEatingSugar = SugarNorm(
+            measurementTime,
+            age
+          ).afterEatingSugar;
+
+          console.log(minSugar, maxSugar, afterEatingSugar);
+
           return (
             <li key={_id} className={s.oneCart}>
               <ul className={s.boxOneCart}>
@@ -46,11 +67,6 @@ export default function ListOfMeasurements({
                     <li>
                       <p className={s.sugarLevel}>
                         {afterEating ?? onAnEmptyStomach ?? 0} ммоль/л
-                        <svg width={18} height={18}>
-                          <use
-                            href={`${sprite}#icon-green-circle-svgrepo-com`}
-                          />
-                        </svg>
                       </p>
                     </li>
                     <li>
@@ -64,7 +80,26 @@ export default function ListOfMeasurements({
                     </li>
                   </ul>
                 </li>
-                <li>
+                <li className={s.boxButtonSvg}>
+                  {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
+                    (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
+                      <svg width={18} height={18}>
+                        <use href={`${sprite}#icon-green-circle-svgrepo-com`} />
+                      </svg>
+                    )}
+                  {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
+                    (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
+                      <svg width={18} height={18} style={{ rotate: "0deg" }}>
+                        <use href={`${sprite}#icon-arrow-next`} />
+                      </svg>
+                    )}
+                  {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
+                    (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
+                      <svg width={18} height={18} style={{ rotate: "180deg" }}>
+                        <use href={`${sprite}#icon-arrow-direction`} />
+                      </svg>
+                    )}
+
                   <button
                     disabled={tecDate !== date}
                     type="button"

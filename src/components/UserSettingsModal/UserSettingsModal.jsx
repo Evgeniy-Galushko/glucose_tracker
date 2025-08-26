@@ -144,19 +144,19 @@ export default function UserSettingsModal({
                         setFieldValue("age", difference);
 
                         if (difference === 0) {
-                          setFieldValue("bloodSugarNorm", 4);
-                        }
-                        if (difference > 0 && difference <= 14) {
                           setFieldValue("bloodSugarNorm", 4.4);
                         }
-                        if (difference > 14 && difference <= 60) {
-                          setFieldValue("bloodSugarNorm", 5);
-                        }
-                        if (difference > 60 && difference <= 90) {
+                        if (difference > 0 && difference <= 14) {
                           setFieldValue("bloodSugarNorm", 5.5);
                         }
+                        if (difference > 14 && difference <= 60) {
+                          setFieldValue("bloodSugarNorm", 5.9);
+                        }
+                        if (difference > 60 && difference <= 90) {
+                          setFieldValue("bloodSugarNorm", 6.4);
+                        }
                         if (difference > 90) {
-                          setFieldValue("bloodSugarNorm", 5.45);
+                          setFieldValue("bloodSugarNorm", 6.7);
                         }
                       }}
                     >
@@ -233,32 +233,32 @@ export default function UserSettingsModal({
                 <ul>
                   <li>
                     <p className={s.paragraph}>
-                      - новорожденные (до 1 мес): 2.8 – 4.4 средняя 3,6 ммоль/л.
+                      - новорожденные (до 1 мес): 2.8 – 4.4 ммоль/л.
                     </p>
                   </li>
                   <li>
                     <p className={s.paragraph}>
-                      - 1 мес – 6 лет: 3.3 – 5.5 средняя 4,4 ммоль/л.
+                      - 1 мес – 6 лет: 3.3 – 5.5 ммоль/л.
                     </p>
                   </li>
                   <li>
                     <p className={s.paragraph}>
-                      - 6 – 14 лет: 3.3 – 5.5 средняя 4,4 ммоль/л.
+                      - 6 – 14 лет: 3.3 – 5.5 ммоль/л.
                     </p>
                   </li>
                   <li>
                     <p className={s.paragraph}>
-                      - взрослые от 14 до 60 лет: 4.1 - 5.9 средняя 5 ммоль/л.
+                      - взрослые от 14 до 60 лет: 4.1 - 5.9 ммоль/л.
                     </p>
                   </li>
                   <li>
                     <p className={s.paragraph}>
-                      - пожилые люди (60+ лет): 4.6 - 6.4 средняя 5,5 ммоль/л.
+                      - пожилые люди (60+ лет): 4.6 - 6.4 ммоль/л.
                     </p>
                   </li>
                   <li>
                     <p className={s.paragraph}>
-                      - люди старше 90 лет: 4.2 - 6.7 средняя 5,45 ммоль/л.
+                      - люди старше 90 лет: 4.2 - 6.7 ммоль/л.
                     </p>
                   </li>
                 </ul>

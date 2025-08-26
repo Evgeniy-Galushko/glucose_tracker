@@ -11,6 +11,10 @@ import {
   Tooltip,
   AreaChart,
   Area,
+  ResponsiveContainer,
+  Legend,
+  Line,
+  LineChart,
 } from "recharts";
 
 export default function MeasurementSchedule({ screenSize, graphHeights }) {
@@ -40,11 +44,22 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
                 <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="time" />
-            <YAxis ticks={[2, 4, 6, 8, 10, 12, 14, 16]} />
+            <XAxis dataKey="time" padding={{ left: 15 }} />
+            <YAxis ticks={[0, 2, 4, 6, 8, 10, 12, 14, 16]} />
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area
+              label={({ x, y, value }) => (
+                <text
+                  x={x}
+                  y={y - 10}
+                  textAnchor="middle"
+                  fill="#706cb0ff"
+                  fontSize={20}
+                >
+                  {value}
+                </text>
+              )}
               dot={{ stroke: "#524f84ff", strokeWidth: 1, r: 5 }}
               name="натощак"
               type="monotone"
@@ -61,9 +76,30 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
               stroke="#82ca9d"
               fillOpacity={1}
               fill="url(#colorPv)"
+              label={({ x, y, value }) => (
+                <text
+                  x={x}
+                  y={y - 10}
+                  textAnchor="middle"
+                  fill="#74ac8aff"
+                  fontSize={20}
+                >
+                  {value}
+                </text>
+              )}
             />
           </AreaChart>
         )}
+        <ul className={s.description}>
+          <li className={s.oneDescription}>
+            <span className={s.emptyStomach}></span>
+            <p className={s.descriptionTitle}>натощак</p>
+          </li>
+          <li className={s.oneDescription}>
+            <span className={s.afterEating}></span>
+            <p className={s.descriptionTitle}>после еды</p>
+          </li>
+        </ul>
       </li>
       <li>
         <h2 className={s.title}>За выбранный месяц</h2>
@@ -110,6 +146,16 @@ export default function MeasurementSchedule({ screenSize, graphHeights }) {
             />
           </AreaChart>
         )}
+        <ul className={s.description}>
+          <li className={s.oneDescription}>
+            <span className={s.emptyStomach}></span>
+            <p className={s.descriptionTitle}>натощак</p>
+          </li>
+          <li className={s.oneDescription}>
+            <span className={s.afterEating}></span>
+            <p className={s.descriptionTitle}>после еды</p>
+          </li>
+        </ul>
       </li>
     </ul>
   );
