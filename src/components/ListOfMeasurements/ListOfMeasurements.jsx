@@ -2,23 +2,18 @@ import s from "./ListOfMeasurements.module.css";
 import sprite from "../../img/icon-sprite.svg";
 import { selectUser } from "../../redux/auth/selectors.js";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+
 import SugarNorm from "../../utils/sugarNorm.js";
+import { useEffect } from "react";
 
 export default function ListOfMeasurements({
   oneDay,
   setModalMeasurement,
   setIdDelete,
 }) {
-  // const [minSugar, setMinSugar] = useState(0);
-  // const [maxSugar, setMaxSugar] = useState(0);
-  // const [afterEatingSugar, setAfterEatingSugar] = useState(0);
-
   const userInformation = useSelector(selectUser);
-  const { name, weight, height, bloodSugarNorm, age } = userInformation;
+  const { age } = userInformation;
   if (!oneDay) return;
-
-  console.log(age);
 
   const handleOpenModalDelete = (id) => {
     setModalMeasurement(true);
@@ -47,12 +42,14 @@ export default function ListOfMeasurements({
         }) => {
           const minSugar = SugarNorm(measurementTime, age).minSugar;
           const maxSugar = SugarNorm(measurementTime, age).maxSugar;
-          const afterEatingSugar = SugarNorm(
+          const afterEatingSugarMin = SugarNorm(
             measurementTime,
             age
-          ).afterEatingSugar;
-
-          console.log(minSugar, maxSugar, afterEatingSugar);
+          ).afterEatingSugarMin;
+          const afterEatingSugarMax = SugarNorm(
+            measurementTime,
+            age
+          ).afterEatingSugarMax;
 
           return (
             <li key={_id} className={s.oneCart}>
@@ -81,25 +78,42 @@ export default function ListOfMeasurements({
                   </ul>
                 </li>
                 <li className={s.boxButtonSvg}>
+                  {(afterEating ?? onAnEmptyStomach ?? 0) < minSugar && (
+                    <svg width={18} height={18} style={{ rotate: "180deg" }}>
+                      <use href={`${sprite}#icon-arrow-blue`} />
+                    </svg>
+                  )}
                   {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
                     (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
                       <svg width={18} height={18}>
-                        <use href={`${sprite}#icon-green-circle-svgrepo-com`} />
+                        <use href={`${sprite}#icon-green-circle`} />
                       </svg>
                     )}
-                  {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
-                    (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
-                      <svg width={18} height={18} style={{ rotate: "0deg" }}>
-                        <use href={`${sprite}#icon-arrow-next`} />
+                  {(afterEating ?? onAnEmptyStomach ?? 0) > maxSugar && (
+                    <svg width={18} height={18} style={{ rotate: "0deg" }}>
+                      <use href={`${sprite}#icon-arrow-red`} />
+                    </svg>
+                  )}
+                  {(afterEating ?? onAnEmptyStomach ?? 0) <
+                    afterEatingSugarMin && (
+                    <svg width={18} height={18} style={{ rotate: "180deg" }}>
+                      <use href={`${sprite}#icon-arrow-blue`} />
+                    </svg>
+                  )}
+                  {(afterEating ?? onAnEmptyStomach ?? 0) >=
+                    afterEatingSugarMin &&
+                    (afterEating ?? onAnEmptyStomach ?? 0) <=
+                      afterEatingSugarMax && (
+                      <svg width={18} height={18}>
+                        <use href={`${sprite}#icon-green-circle`} />
                       </svg>
                     )}
-                  {(afterEating ?? onAnEmptyStomach ?? 0) >= minSugar &&
-                    (afterEating ?? onAnEmptyStomach ?? 0) <= maxSugar && (
-                      <svg width={18} height={18} style={{ rotate: "180deg" }}>
-                        <use href={`${sprite}#icon-arrow-direction`} />
-                      </svg>
-                    )}
-
+                  {(afterEating ?? onAnEmptyStomach ?? 0) >
+                    afterEatingSugarMax && (
+                    <svg width={18} height={18} style={{ rotate: "0deg" }}>
+                      <use href={`${sprite}#icon-arrow-red`} />
+                    </svg>
+                  )}
                   <button
                     disabled={tecDate !== date}
                     type="button"

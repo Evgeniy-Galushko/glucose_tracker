@@ -50,6 +50,16 @@
   color: #323f47;
 }
 
+.daysOfTheWeek {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  /* gap: 65px; */
+}
+
 .calendar {
   padding: 4px;
   font-family: "Courier Prime", sans-serif;
@@ -62,6 +72,14 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 15px;
+}
+
+.emptyRing {
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: none;
 }
 
 .buttonCalend {

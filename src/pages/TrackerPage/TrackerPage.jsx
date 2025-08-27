@@ -8,10 +8,9 @@ import {
   signoutRequest,
   userInformRequest,
 } from "../../redux/auth/operations.js";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import {
-  addMeasuringRequest,
   oneDayRequest,
   oneMonthRequest,
 } from "../../redux/measuring/operations.js";
@@ -45,9 +44,22 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
-  // console.log(addingDimension);
+  // console.log(!userInformation.age);
+  // console.log(userInformation.age);
 
   useEffect(() => {
+    let timeId;
+    if (!userInformation.age) {
+      timeId = setInterval(() => {
+        toast.error(
+          "Вы не внесли свои данные, чтоб корректно отображался уровень сахара!"
+        );
+      }, 180000);
+      // console.log(timeId);
+    }
+
+    // if (timeId) clearInterval(timeId);
+
     dispatch(userInformRequest());
     dispatch(oneMonthRequest(selectedMonth));
     dispatch(oneDayRequest(selectedDay));
@@ -72,10 +84,14 @@ export default function TrackerPage() {
     }
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      if (timeId) clearInterval(timeId);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [
     dispatch,
     windowSize.width,
+    userInformation.age,
     userInformation,
     selectedDay,
     selectedMonth,

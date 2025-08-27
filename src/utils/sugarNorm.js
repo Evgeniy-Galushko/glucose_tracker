@@ -8,10 +8,16 @@ export default function SugarNorm(measurementTime, age) {
   }
 
   if (measurementTime === "после еды") {
-    if (age === 0) return { afterEatingSugar: 5.5 };
-    if (age > 0 && age <= 14) return { afterEatingSugar: 7.8 };
-    if (age > 14 && age <= 60) return { afterEatingSugar: 7.8 };
-    if (age > 60 && age <= 90) return { afterEatingSugar: 8 };
-    if (age > 90) return { afterEatingSugar: 8.5 };
+    if (age === 0)
+      return { afterEatingSugarMin: 2.8, afterEatingSugarMax: 5.5 };
+    if (age > 0 && age <= 14)
+      return { afterEatingSugarMin: 3.3, afterEatingSugarMax: 7.8 };
+    if (age > 14 && age <= 60)
+      return { afterEatingSugarMin: 4.1, afterEatingSugarMax: 7.8 };
+    if (age > 60 && age <= 90)
+      return { afterEatingSugarMin: 4.6, afterEatingSugarMax: 8 };
+    if (age > 90) return { afterEatingSugarMin: 4.2, afterEatingSugarMax: 8.5 };
   }
+
+  return { measurementTime, age };
 }

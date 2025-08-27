@@ -95,12 +95,64 @@
   flex-direction: row;
   gap: 10px;
   overflow-x: scroll;
-  margin: 24px 0 40px 0;
+  margin: 24px 0 10px 0;
   padding-bottom: 24px;
   scrollbar-color: #2563eb #f0eff4;
   /* scrollbar-width: thin; */
   /* overflow-x: hidden; */
 }
+
+.titleStub {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #323f47;
+
+  margin: 40px 0;
+}
+
+.designations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  row-gap: 5px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 20px 0;
+}
+
+.oneBoDesignations {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+/* .boxInstruction {
+  position: absolute;
+  background-color: #fff;
+  width: 200px;
+
+  overflow-y: scroll;
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 15px;
+  top: 50px;
+
+  display: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+} */
+
+/* .oneBoDesignations:hover .boxInstruction {
+  display: block;
+} */
 
 @media screen and (min-width: 768px) {
   .boxNameAndSettings {
@@ -132,6 +184,24 @@
   .iconPluss {
     width: 16px;
     height: 14px;
+  }
+
+  .designations {
+    flex-wrap: nowrap;
+    gap: 25px;
+    padding: 20px 0 40px 0;
+  }
+
+  .titleStub {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    text-align: center;
+    color: #323f47;
+
+    margin: 40px 0;
   }
 }
 

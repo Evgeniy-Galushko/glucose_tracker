@@ -38,7 +38,7 @@ export const allSugarRequest = createAsyncThunk(
         setAuthHeader(token);
       }
       const data = await axios.get(`/api/measurements/all-dimensions`);
-      console.log(data.data);
+      // console.log(data.data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -87,7 +87,7 @@ export const oneMonthRequest = createAsyncThunk(
 export const sixMonthRequest = createAsyncThunk(
   "news/sixMonth",
   async (sixMonth, thunkAPI) => {
-    console.log(sixMonth);
+    // console.log(sixMonth);
     try {
       const state = thunkAPI.getState();
       const token = state.auth.token;
@@ -97,7 +97,7 @@ export const sixMonthRequest = createAsyncThunk(
       const data = await axios.get(
         `/api/measurements/in-six-months?month=${sixMonth}`
       );
-      console.log(data.data);
+      // console.log(data.data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -117,7 +117,7 @@ export const deleteMeasuringRequest = createAsyncThunk(
       const data = await axios.delete(
         `/api/measurements/delete-measurement/${id}`
       );
-      console.log(data);
+      // console.log(data);
       if (data.status === 204) {
         toast.success("Измерение удалено");
       }

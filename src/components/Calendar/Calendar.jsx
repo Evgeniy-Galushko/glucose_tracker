@@ -28,12 +28,15 @@ export default function Calendar({
   const [year, setYear] = useState(new Date().getFullYear());
   const [dayOfMonth, setDayOfMonth] = useState("");
   const [currentВate, setCurrentDate] = useState(new Date().getDate());
+  const [daysOfWeek, setDaysOfWeek] = useState();
 
   const years = new Date().getFullYear();
   const months = new Date().getMonth() + 1;
   const dayTitle = new Date().getDate();
 
   // console.log(`${year}-${number.toString().padStart(2, "0")}`);
+
+  // console.log(new Date().getDay());
 
   useEffect(() => {
     switch (number) {
@@ -93,6 +96,13 @@ export default function Calendar({
       days.push(i);
     }
 
+    // const deyAndWeek = new Date(year, number - 1, 1).getDay();
+    // const dayWeek = [];
+    // for (let i = 1; i <= deyAndWeek - 1; i++) {
+    //   dayWeek.push(i);
+    // }
+    // setDaysOfWeek(dayWeek);
+
     setNumberOfDaysInAMonth(days);
     setSelectedMonth(`${year}-${number.toString().padStart(2, "0")}`);
     setChartTitle(
@@ -136,54 +146,7 @@ export default function Calendar({
     }
   };
 
-  // function converter(dat) {
-  //   const day = dat.toISOString().split("T")[0];
-  //   const days = new Date(day);
-  //   const firstDay = days.getTime() - 24 * 60 * 60 * 1000;
-  //   const secondDay = days.getTime() - 24 * 2 * 60 * 60 * 1000;
-  //   const thirdDay = days.getTime() - 24 * 3 * 60 * 60 * 1000;
-  //   const fourthDay = days.getTime() - 24 * 4 * 60 * 60 * 1000;
-  //   const fifthDay = days.getTime() - 24 * 5 * 60 * 60 * 1000;
-  //   const sixthDay = days.getTime() - 24 * 6 * 60 * 60 * 1000;
-  //   return {
-  //     1: new Date(dat).getDate(),
-  //     2: new Date(firstDay).toISOString().split("T")[0],
-  //     3: new Date(secondDay).toISOString().split("T")[0],
-  //     4: new Date(thirdDay).toISOString().split("T")[0],
-  //     5: new Date(fourthDay).toISOString().split("T")[0],
-  //     6: new Date(fifthDay).toISOString().split("T")[0],
-  //     7: new Date(sixthDay).toISOString().split("T")[0],
-  //   };
-  // }
-
-  // function converter(dat) {
-  //   const day = dat.toISOString().split("T")[0];
-  //   const days = new Date(day);
-  //   const firstDay = days.getTime() - 24 * 60 * 60 * 1000;
-  //   const secondDay = days.getTime() - 24 * 2 * 60 * 60 * 1000;
-  //   const thirdDay = days.getTime() - 24 * 3 * 60 * 60 * 1000;
-  //   const fourthDay = days.getTime() - 24 * 4 * 60 * 60 * 1000;
-  //   const fifthDay = days.getTime() - 24 * 5 * 60 * 60 * 1000;
-  //   const sixthDay = days.getTime() - 24 * 6 * 60 * 60 * 1000;
-  //   return [
-  //     { name: new Date(sixthDay).getDate() },
-  //     { name: new Date(fifthDay).getDate() },
-  //     { name: new Date(fourthDay).getDate() },
-  //     { name: new Date(thirdDay).getDate() },
-  //     { name: new Date(secondDay).getDate() },
-  //     { name: new Date(firstDay).getDate() },
-  //     { name: new Date(day).getDate() },
-  //   ];
-  // }
-
-  // const masiv = converter(new Date());
-  // console.log(masiv);
-
-  // console.log(converter(new Date()));
-
-  // console.log(new Date("2025-03-17T14:48:16.794Z").getM());
-
-  console.log();
+  // console.log(daysOfWeek);
 
   return (
     <div className={s.boxCalendar}>
@@ -208,7 +171,23 @@ export default function Calendar({
           </button>
         </li>
       </ul>
+      {/* <ul className={s.daysOfTheWeek}>
+        <li>пн</li>
+        <li>вт</li>
+        <li>ср</li>
+        <li>чт</li>
+        <li>пт</li>
+        <li>сб</li>
+        <li>вс</li>
+      </ul> */}
       <ul className={s.calendar}>
+        {/* {daysOfWeek.length === 0
+          ? [1, 2, 3, 4, 5, 6].map((ob, index) => {
+              return <li className={s.emptyRing} key={index}></li>;
+            })
+          : daysOfWeek.map((ob, index) => {
+              return <li className={s.emptyRing} key={index}></li>;
+            })} */}
         {numberOfDaysInAMonth.map((day, index) => {
           // console.log(
           //   `${years}-${months.toString().padStart(2, "0")}-${day
