@@ -13,6 +13,10 @@ function App() {
     import("../pages/TrackerPage/TrackerPage.jsx")
   );
 
+  const AllDimensionsPage = lazy(() =>
+    import("../pages/AllDimensionsPage/AllDimensionsPage.jsx")
+  );
+
   return (
     <Suspense fallback={"loading"}>
       <Routes>
@@ -20,6 +24,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/tracker" element={<TrackerPage />} />
+        <Route path="/allDimensions" element={<AllDimensionsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

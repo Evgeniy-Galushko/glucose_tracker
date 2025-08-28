@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./DetailedInfo.module.css";
 import { selectToken, selectUser } from "../../redux/auth/selectors.js";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa6";
@@ -59,9 +59,16 @@ export default function DetailedInfo({
         handleCloseModalMeasurement={handleCloseModalMeasurement}
       />
       <div className={s.boxNameAndSettings}>
-        <h2 className={s.titleName}>
-          Привет, <span className={s.name}>{user.name}</span>
-        </h2>
+        <ul>
+          <li>
+            <h2 className={s.titleName}>
+              Привет, <span className={s.name}>{user.name}</span>
+            </h2>
+          </li>
+          <li>
+            <NavLink to="/allDimensions">Список всех измерений</NavLink>
+          </li>
+        </ul>
         <ul className={s.boxButton}>
           <li>
             <button

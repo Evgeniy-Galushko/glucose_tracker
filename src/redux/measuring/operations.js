@@ -38,8 +38,8 @@ export const allSugarRequest = createAsyncThunk(
         setAuthHeader(token);
       }
       const data = await axios.get(`/api/measurements/all-dimensions`);
-      // console.log(data.data);
-      return data.data;
+      // console.log(data.data.data);
+      return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
