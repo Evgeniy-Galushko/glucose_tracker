@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
   const HomePages = lazy(() => import("../pages/HomePages/HomePages.jsx"));
@@ -13,8 +13,12 @@ function App() {
     import("../pages/TrackerPage/TrackerPage.jsx")
   );
 
-  const AllDimensionsPage = lazy(() =>
-    import("../pages/AllDimensionsPage/AllDimensionsPage.jsx")
+  const MeasurementSchedule = lazy(() =>
+    import("../components/MeasurementSchedule/MeasurementSchedule.jsx")
+  );
+
+  const AllDimensions = lazy(() =>
+    import("../components/AllDimensions/AllDimensions.jsx")
   );
 
   return (
@@ -23,8 +27,11 @@ function App() {
         <Route path="/" element={<HomePages />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/signin" element={<SignInPage />} />
-        <Route path="/tracker" element={<TrackerPage />} />
-        <Route path="/allDimensions" element={<AllDimensionsPage />} />
+        <Route path="/tracker/" element={<TrackerPage />}>
+          <Route index element={<Navigate to="charts" replace />} />
+          <Route path="charts" element={<MeasurementSchedule />} />
+          <Route path="all_dimensions" element={<AllDimensions />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

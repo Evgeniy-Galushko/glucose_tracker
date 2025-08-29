@@ -16,10 +16,45 @@ import {
   Line,
   LineChart,
 } from "recharts";
+import { useEffect, useState } from "react";
 
-export default function MeasurementSchedule({ screenSize, graphHeights }) {
+export default function MeasurementSchedule() {
   const oneDayServer = useSelector(selectOneDay);
   const oneMonth = useSelector(selectOneMonth);
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  const [screenSize, setScreenSize] = useState(null);
+  const [graphHeights, setGraphHeights] = useState(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    if (windowSize.width < 768) {
+      setScreenSize(311);
+      setGraphHeights(200);
+    }
+    if (windowSize.width >= 768 && windowSize.width < 1440) {
+      setScreenSize(640);
+      setGraphHeights(250);
+    }
+    if (windowSize.width >= 1440) {
+      setScreenSize(590);
+      setGraphHeights(300);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [windowSize.width]);
 
   const oneDay = oneDayServer.toSorted((initial, final) => {
     return (

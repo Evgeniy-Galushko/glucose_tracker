@@ -3,13 +3,13 @@ import DetailedInfo from "../../components/DetailedInfo/DetailedInfo.jsx";
 import MeasurementSchedule from "../../components/MeasurementSchedule/MeasurementSchedule.jsx";
 import s from "./TrackerPage.module.css";
 import { selectToken, selectUser } from "../../redux/auth/selectors.js";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import {
   signoutRequest,
   userInformRequest,
 } from "../../redux/auth/operations.js";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   oneDayRequest,
   oneMonthRequest,
@@ -20,12 +20,6 @@ import DeleteMeasurementModal from "../../components/DeleteMeasurementModal/Dele
 import AddingDimensionModal from "../../components/AddingDimensionModal/AddingDimensionModal.jsx";
 
 export default function TrackerPage() {
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-  const [screenSize, setScreenSize] = useState(null);
-  const [graphHeights, setGraphHeights] = useState(null);
   const [userSettingsModal, setUserSettingsModal] = useState(false);
   const [modalLogOut, setModalLogOut] = useState(false);
   const [addingDimensionModal, setAddingDimensionModal] = useState(false);
@@ -63,34 +57,11 @@ export default function TrackerPage() {
     dispatch(userInformRequest());
     dispatch(oneMonthRequest(selectedMonth));
     dispatch(oneDayRequest(selectedDay));
-    const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    if (windowSize.width < 768) {
-      setScreenSize(311);
-      setGraphHeights(200);
-    }
-    if (windowSize.width >= 768 && windowSize.width < 1440) {
-      setScreenSize(640);
-      setGraphHeights(250);
-    }
-    if (windowSize.width >= 1440) {
-      setScreenSize(590);
-      setGraphHeights(300);
-    }
-
-    window.addEventListener("resize", handleResize);
     return () => {
       if (timeId) clearInterval(timeId);
-      window.removeEventListener("resize", handleResize);
     };
   }, [
     dispatch,
-    windowSize.width,
     userInformation.age,
     userInformation,
     selectedDay,
@@ -140,12 +111,18 @@ export default function TrackerPage() {
       />
       <ul className={s.tracker}>
         <li className={s.boxTracker}>
-          <MeasurementSchedule
-            chartTitle={chartTitle}
-            selectedDay={selectedDay}
-            screenSize={screenSize}
-            graphHeights={graphHeights}
-          />
+          {/* <MeasurementSchedule /> */}
+          <ul>
+            <li>
+              <NavLink to="/tracker/charts">Графики</NavLink>
+            </li>
+            <li>
+              <NavLink to="/tracker/all_dimensions">Список измерений</NavLink>
+            </li>
+          </ul>
+          <Suspense fallback={<div>loading date...</div>}>
+            <Outlet />
+          </Suspense>
         </li>
         <li className={s.boxDetailed}>
           <DetailedInfo
