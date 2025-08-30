@@ -16,6 +16,7 @@ const measuringSlice = createSlice({
     oneMonth: [],
     sixMonth: [],
     addSugar: {},
+    isLoadingAllSugar: false,
     isLoading: false,
     error: null,
   },
@@ -31,15 +32,15 @@ const measuringSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(allSugarRequest.pending, (state) => {
-        state.isLoading = true;
+        state.isLoadingAllSugar = true;
       })
       .addCase(allSugarRequest.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingAllSugar = false;
         state.error = null;
         state.allSugar = action.payload;
       })
       .addCase(allSugarRequest.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isLoadingAllSugar = false;
         state.error = action.payload;
       })
       .addCase(oneDayRequest.pending, (state) => {

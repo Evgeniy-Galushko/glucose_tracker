@@ -8,4 +8,7 @@ export const selectSixMonth = (state) => state.measuring.sixMonth;
 
 export const selectIsLoading = (state) => state.measuring.isLoading;
 
+export const selectIsLoadingAllSugar = (state) =>
+  state.measuring.isLoadingAllSugar;
+
 export const selectError = (state) => state.measuring.error;

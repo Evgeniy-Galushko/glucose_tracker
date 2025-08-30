@@ -1,0 +1,214 @@
+.svgFrame {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svgFrame svg {
+  position: absolute;
+  transition: 0.5s;
+  z-index: calc(1 - (0.2 * var(--j)));
+  transform-origin: center;
+  width: 344px;
+  height: 344px;
+  fill: none;
+}
+
+.svgFrame:hover svg {
+  transform: rotate(-80deg) skew(30deg) translateX(calc(45px * var(--i)))
+    translateY(calc(-35px * var(--i)));
+}
+
+.svgFrame svg #center {
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.svgFrame:hover svg #center {
+  transform: rotate(-30deg) translateX(45px) translateY(-3px);
+}
+
+#out2 {
+  animation: rotate16 7s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+#out3 {
+  animation: rotate16 3s ease-in-out infinite alternate;
+  transform-origin: center;
+  stroke: rgb(255, 51, 0);
+}
+
+#inner3,
+#inner1 {
+  animation: rotate16 4s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+#center1 {
+  fill: rgb(255, 51, 0);
+  animation: rotate16 2s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes rotate16 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*----------------------------*/
+/* heart beat */
+
+.boxDiv {
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
+  /* width: 100vw; */
+  /* height: 100vh; */
+  /* z-index: 9999; */
+  /* background-color: rgba(93, 107, 107, 0.24); */
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.heartbeatloader {
+  /* opacity: 1; */
+  position: absolute;
+  z-index: 999;
+  width: 15vmin;
+  height: 15vmin;
+  /* z-index: -2; */
+  margin: auto;
+  top: 150px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(183, 185, 185, 0.559); */
+}
+
+.svgdraw {
+  top: 30%;
+  left: 26%;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  transform: scale(1.4);
+  z-index: 3;
+}
+
+.path {
+  stroke: rgb(255, 254, 254);
+  stroke-width: 4;
+  stroke-dasharray: 1000px;
+  stroke-dashoffset: 1000px;
+  animation: draw 1.5s infinite forwards normal linear;
+  animation-delay: 0.1s;
+  position: relative;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.innercircle {
+  position: absolute;
+  top: 17%;
+  left: 100.5%;
+  transform: translate(-50%, -50%) scale(1.2);
+  width: 160%;
+  height: auto;
+  z-index: 1;
+  opacity: 0.97;
+  animation: innerbeat 1.5s infinite linear forwards;
+}
+
+.innercircle:before,
+.innercircle:after {
+  position: absolute;
+  content: "";
+  left: 25%;
+  top: 0;
+  width: 25%;
+  height: auto;
+  padding-bottom: 40%;
+  /* background: rgb(225, 95, 95); */
+  background: rgb(36, 99, 235);
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.innercircle:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+@keyframes innerbeat {
+  0% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  10% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+
+  75% {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
+
+.outercircle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* background-color: rgba(230, 92, 92, 0.774); */
+  background-color: rgba(36, 99, 235, 0.774);
+  box-shadow: 0 0 30px 0px #000;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.7;
+  top: 0;
+  left: 0;
+  transform: scale(1.2);
+  animation: outerbeat 1.5s infinite linear forwards;
+}
+
+@keyframes outerbeat {
+  0% {
+    transform: scale(1.2);
+  }
+
+  10% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(1.3);
+  }
+
+  60% {
+    transform: scale(1.25);
+  }
+
+  75% {
+    transform: scale(1.3);
+  }
+}
