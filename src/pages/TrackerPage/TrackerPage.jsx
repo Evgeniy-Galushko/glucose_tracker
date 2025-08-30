@@ -18,6 +18,8 @@ import UserSettingsModal from "../../components/UserSettingsModal/UserSettingsMo
 import LogOutModal from "../../components/LogOutModal/LogOutModal.jsx";
 import DeleteMeasurementModal from "../../components/DeleteMeasurementModal/DeleteMeasurementModal.jsx";
 import AddingDimensionModal from "../../components/AddingDimensionModal/AddingDimensionModal.jsx";
+import clsx from "clsx";
+import Logo from "../../components/Logo/Logo.jsx";
 
 export default function TrackerPage() {
   const [userSettingsModal, setUserSettingsModal] = useState(false);
@@ -38,8 +40,9 @@ export default function TrackerPage() {
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
 
-  // console.log(!userInformation.age);
-  // console.log(userInformation.age);
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(s.link, isActive && s.active);
+  };
 
   useEffect(() => {
     let timeId;
@@ -111,13 +114,18 @@ export default function TrackerPage() {
       />
       <ul className={s.tracker}>
         <li className={s.boxTracker}>
+          <Logo />
           {/* <MeasurementSchedule /> */}
-          <ul>
+          <ul className={s.navlinkBox}>
             <li>
-              <NavLink to="/tracker/charts">Графики</NavLink>
+              <NavLink to="/tracker/charts" className={buildLinkClass}>
+                Графики
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/tracker/all_dimensions">Список измерений</NavLink>
+              <NavLink to="/tracker/all_dimensions" className={buildLinkClass}>
+                Таблица измерений
+              </NavLink>
             </li>
           </ul>
           <Suspense fallback={<div>loading date...</div>}>

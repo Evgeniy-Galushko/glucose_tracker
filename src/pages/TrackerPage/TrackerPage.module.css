@@ -26,6 +26,42 @@
   width: 343px;
 }
 
+.navlinkBox {
+  margin: 25px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 30px;
+  padding: 12px 20px;
+  /* width: 125px; */
+  height: 42px;
+  background-color: #fff;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #262626;
+  text-align: center;
+
+  &:hover {
+    border: 1px solid #1d51c1;
+  }
+}
+
+.active {
+  background-color: #1d51c1;
+  color: #e1eff5;
+}
+
 @media screen and (min-width: 768px) {
   .sectionTracker {
     max-width: 768px;
@@ -39,6 +75,20 @@
   .boxDetailed {
     padding: 32px;
     width: 704px;
+  }
+
+  .link {
+    padding: 15px 30px;
+    /* width: 125px; */
+    height: 50px;
+
+    font-size: 16px;
+    line-height: 1.29;
+  }
+
+  .active {
+    background-color: #1d51c1;
+    color: #e9e9e9;
   }
 }
 

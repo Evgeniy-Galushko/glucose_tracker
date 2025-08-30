@@ -32,9 +32,9 @@ export default function AllDimensions() {
 
   if (!allDimensions) return;
 
-  const handleClickPrint = () => {
-    window.print();
-  };
+  // const handleClickPrint = () => {
+  //   window.print();
+  // };
 
   const exportToExcel = () => {
     const data = allDimensions.map(
@@ -63,20 +63,12 @@ export default function AllDimensions() {
     <section className={s.sectionAllDimensions}>
       <ul className={s.allDimensions}>
         <li className={s.boxLink}>
-          <NavLink to="/tracker" className={s.link}>
-            <svg width={24} height={24}>
-              <use href={`${sprite}#icon-arrow-back`} />
-            </svg>
-            Вернутся обратно
-          </NavLink>
-
-          <button onClick={handleClickPrint} type="button">
-            Распечатать
+          <button onClick={exportToExcel} className={s.downloadButton}>
+            Скачать в Excel
           </button>
-          <button onClick={exportToExcel}>Скачать в Excel</button>
         </li>
         <li>
-          <div ref={printRef}>
+          <div ref={printRef} className={s.boxTable}>
             <table className={s.table}>
               <tbody>
                 <tr>

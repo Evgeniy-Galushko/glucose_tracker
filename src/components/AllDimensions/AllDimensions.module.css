@@ -1,20 +1,34 @@
 .sectionAllDimensions {
-  height: 736px;
-  overflow-y: auto;
-  scrollbar-color: #2563eb #f0eff4;
 }
 
 .allDimensions {
-  /* border-radius: 30px;
-  padding: 16px;
-  width: 343px;
-  background-color: #f0eff4; */
 }
 
 .boxLink {
   box-sizing: border-box;
   margin-bottom: 30px;
-  /* justify-content: center; */
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.downloadButton {
+  border: none;
+  border-radius: 30px;
+  padding: 11px 20px;
+  /* width: 92px; */
+  background-color: #2563eb;
+  height: 43px;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #fff;
+
+  &:hover {
+    background-color: #1d51c1;
+  }
 }
 
 .link {
@@ -39,6 +53,12 @@
   &:hover {
     background-color: #1d51c1;
   }
+}
+
+.boxTable {
+  height: 560px;
+  overflow-y: auto;
+  scrollbar-color: #2563eb #f0eff4;
 }
 
 .table {
@@ -78,35 +98,91 @@
 }
 
 .widthTime {
-  width: 55px;
+  width: 45px;
 }
 
 .widthLevel {
-  width: 60px;
+  width: 55px;
 }
 
 .widthMeasurementTime {
-  width: 75px;
+  width: 70px;
 }
 
 .widthNorm {
-  width: 60px;
+  width: 55px;
 }
 
 @media screen and (min-width: 768px) {
   .sectionAllDimensions {
-    /* max-width: 768px;
-    padding: 32px; */
   }
 
-  .allDimensions {
-    /* padding: 32px;
-    width: 704px; */
+  .boxTable {
+    height: 640px;
+    overflow-y: auto;
+    scrollbar-color: #2563eb #f0eff4;
+  }
+
+  .downloadButton {
+    border: none;
+    border-radius: 30px;
+    padding: 15px 25px;
+    /* width: 92px; */
+    background-color: #2563eb;
+    height: 53px;
+
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #fff;
+
+    &:hover {
+      background-color: #1d51c1;
+    }
+  }
+
+  .titleLine {
+    padding: 10px 0;
+
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .tableRows {
+    padding: 10px 0;
+
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .widthDate {
+    width: 115px;
+  }
+
+  .widthTime {
+    width: 85px;
+  }
+
+  .widthLevel {
+    width: 95px;
+  }
+
+  .widthMeasurementTime {
+    width: 110px;
+  }
+
+  .widthNorm {
+    width: 95px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .sectionAllDimensions {
-    /* max-width: 1440px; */
+    height: 851px;
+  }
+
+  .boxTable {
+    height: 760px;
   }
 }
