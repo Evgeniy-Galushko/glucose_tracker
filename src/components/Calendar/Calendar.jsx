@@ -28,7 +28,7 @@ export default function Calendar({
   const [year, setYear] = useState(new Date().getFullYear());
   const [dayOfMonth, setDayOfMonth] = useState("");
   const [currentВate, setCurrentDate] = useState(new Date().getDate());
-  const [daysOfWeek, setDaysOfWeek] = useState();
+  const [daysOfWeek, setDaysOfWeek] = useState([]);
 
   const years = new Date().getFullYear();
   const months = new Date().getMonth() + 1;
@@ -97,11 +97,39 @@ export default function Calendar({
     }
 
     // const deyAndWeek = new Date(year, number - 1, 1).getDay();
+
+    function array(number) {
+      switch (number) {
+        case 1:
+          setDaysOfWeek([]);
+          break;
+        case 2:
+          setDaysOfWeek([1]);
+          break;
+        case 3:
+          setDaysOfWeek([1, 2]);
+          break;
+        case 4:
+          setDaysOfWeek([1, 2, 3]);
+          break;
+        case 5:
+          setDaysOfWeek([1, 2, 3, 4]);
+          break;
+        case 6:
+          setDaysOfWeek([1, 2, 3, 4, 5]);
+          break;
+        case 0:
+          setDaysOfWeek([1, 2, 3, 4, 5, 6]);
+          break;
+      }
+    }
     // const dayWeek = [];
     // for (let i = 1; i <= deyAndWeek - 1; i++) {
     //   dayWeek.push(i);
     // }
     // setDaysOfWeek(dayWeek);
+
+    array(new Date(year, number - 1, 1).getDay());
 
     setNumberOfDaysInAMonth(days);
     setSelectedMonth(`${year}-${number.toString().padStart(2, "0")}`);
@@ -171,26 +199,41 @@ export default function Calendar({
           </button>
         </li>
       </ul>
-      {/* <ul className={s.daysOfTheWeek}>
-        <li>пн</li>
-        <li>вт</li>
-        <li>ср</li>
-        <li>чт</li>
-        <li>пт</li>
-        <li>сб</li>
-        <li>вс</li>
-      </ul> */}
+      <ul className={s.daysOfTheWeek}>
+        <li>
+          <p className={s.dayWeek}>пн</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>вт</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>ср</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>чт</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>пт</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>сб</p>
+        </li>
+        <li>
+          <p className={s.dayWeek}>вс</p>
+        </li>
+      </ul>
       <ul className={s.calendar}>
-        {/* {daysOfWeek.length === 0
-          ? [1, 2, 3, 4, 5, 6].map((ob, index) => {
-              return <li className={s.emptyRing} key={index}></li>;
-            })
-          : daysOfWeek.map((ob, index) => {
-              return <li className={s.emptyRing} key={index}></li>;
-            })} */}
+        {daysOfWeek.map((ob, index) => {
+          return <li className={s.emptyRing} key={index}></li>;
+        })}
         {numberOfDaysInAMonth.map((day, index) => {
           // console.log(
-          //   `${years}-${months.toString().padStart(2, "0")}-${day
+          //   `${years}-${number.toString().padStart(2, "0")}-${day
+          //     .toString()
+          //     .padStart(2, "0")}`
+          // );
+          // console.log(
+          //   `${years}-${months.toString().padStart(2, "0")}-${dayTitle
           //     .toString()
           //     .padStart(2, "0")}`
           // );
@@ -208,7 +251,7 @@ export default function Calendar({
                 )}
                 onClick={handleClickDay}
                 disabled={
-                  `${years}-${number.toString().padStart(2, "0")}-${day
+                  `${year}-${number.toString().padStart(2, "0")}-${day
                     .toString()
                     .padStart(2, "0")}` >
                   `${years}-${months.toString().padStart(2, "0")}-${dayTitle
