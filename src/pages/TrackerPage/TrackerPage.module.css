@@ -16,6 +16,7 @@
   padding: 16px;
   border-radius: 30px;
   background-color: #f0eff4;
+  min-height: 762px;
 }
 
 .boxDetailed {
@@ -70,6 +71,7 @@
 
   .boxTracker {
     padding: 32px;
+    min-height: 1011px;
   }
 
   .boxDetailed {
