@@ -37,9 +37,6 @@ export default function DetailedInfo({
   const error = useSelector(selectErrorUser);
   const errorMeasuring = useSelector(selectError);
 
-  console.log(error);
-  console.log(errorMeasuring);
-
   useEffect(() => {
     if (!token) {
       navigate("/");

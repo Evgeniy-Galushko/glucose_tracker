@@ -9,6 +9,7 @@ import { clsx } from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { registrationRequest } from "../../redux/auth/operations.js";
 import { selectToken } from "../../redux/auth/selectors.js";
+import { errorReset } from "../../redux/measuring/slice.js";
 
 export default function SignUpForm() {
   const [displayPassword, setDisplayPassword] = useState(false);
@@ -47,6 +48,7 @@ export default function SignUpForm() {
   };
 
   const handleSubmit = (values, action) => {
+    dispatch(errorReset());
     dispatch(registrationRequest(values));
 
     action.resetForm();
