@@ -88,6 +88,13 @@ const measuringSlice = createSlice({
         state.error = action.payload;
       });
   },
+  reducers: {
+    errorReset(state) {
+      state.error = null;
+    },
+  },
 });
+
+export const { errorReset } = measuringSlice.actions;
 
 export default measuringSlice.reducer;

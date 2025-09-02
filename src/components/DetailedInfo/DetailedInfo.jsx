@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./DetailedInfo.module.css";
-import { selectToken, selectUser } from "../../redux/auth/selectors.js";
+import {
+  selectErrorUser,
+  selectToken,
+  selectUser,
+} from "../../redux/auth/selectors.js";
 import { useNavigate } from "react-router-dom";
 import { BsGear } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
@@ -10,8 +14,10 @@ import sprite from "../../img/icon-sprite.svg";
 import { useEffect, useState } from "react";
 import DeleteMeasurementModal from "../DeleteMeasurementModal/DeleteMeasurementModal.jsx";
 import ListOfMeasurements from "../ListOfMeasurements/ListOfMeasurements.jsx";
-import { selectOneDay } from "../../redux/measuring/selectors.js";
+import { selectError, selectOneDay } from "../../redux/measuring/selectors.js";
 import Calendar from "../Calendar/Calendar.jsx";
+import { errorNotAuthorized } from "../../redux/auth/slice.js";
+import { errorReset } from "../../redux/measuring/slice.js";
 
 export default function DetailedInfo({
   setUserSettingsModal,
@@ -24,16 +30,37 @@ export default function DetailedInfo({
   const [modalMeasurement, setModalMeasurement] = useState(false);
   const [idDelete, setIdDelete] = useState("");
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const oneDay = useSelector(selectOneDay);
+  const error = useSelector(selectErrorUser);
+  const errorMeasuring = useSelector(selectError);
+
+  console.log(error);
+  console.log(errorMeasuring);
 
   useEffect(() => {
     if (!token) {
       navigate("/");
     }
-  }, [navigate, token, oneDay]);
+
+    if (error) {
+      if (error.includes("401")) {
+        dispatch(errorNotAuthorized());
+        dispatch(errorReset());
+        // console.log("err");
+      }
+    }
+
+    if (errorMeasuring) {
+      if (errorMeasuring.includes("401")) {
+        dispatch(errorNotAuthorized());
+        dispatch(errorReset());
+        // console.log("err");
+      }
+    }
+  }, [navigate, token, oneDay, error, dispatch, errorMeasuring]);
 
   const handleOpenUserSettingsModal = () => {
     setUserSettingsModal(true);

@@ -97,6 +97,14 @@ const authSlise = createSlice({
         state.isLoading = false;
       });
   },
+  reducers: {
+    errorNotAuthorized(state) {
+      state.token = null;
+      state.error = null;
+    },
+  },
 });
+
+export const { errorNotAuthorized } = authSlise.actions;
 
 export default authSlise.reducer;

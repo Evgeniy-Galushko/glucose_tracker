@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailedInfo from "../../components/DetailedInfo/DetailedInfo.jsx";
 import MeasurementSchedule from "../../components/MeasurementSchedule/MeasurementSchedule.jsx";
 import s from "./TrackerPage.module.css";
-import { selectToken, selectUser } from "../../redux/auth/selectors.js";
+import {
+  selectErrorUser,
+  selectToken,
+  selectUser,
+} from "../../redux/auth/selectors.js";
 import { Suspense, useEffect, useState } from "react";
 import {
   signoutRequest,
