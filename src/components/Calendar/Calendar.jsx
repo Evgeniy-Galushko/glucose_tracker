@@ -7,7 +7,7 @@ import clsx from "clsx";
 export default function Calendar({
   setSelectedDay,
   setSelectedMonth,
-  setChartTitle,
+  // setChartTitle,
 }) {
   const [numberOfDaysInAMonth, setNumberOfDaysInAMonth] = useState(() => {
     const day = new Date(
@@ -27,7 +27,7 @@ export default function Calendar({
   const [number, setNumber] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
   const [dayOfMonth, setDayOfMonth] = useState("");
-  const [currentВate, setCurrentDate] = useState(new Date().getDate());
+  // const [currentВate, setCurrentDate] = useState(new Date().getDate());
   const [daysOfWeek, setDaysOfWeek] = useState([]);
 
   const years = new Date().getFullYear();
@@ -133,12 +133,12 @@ export default function Calendar({
 
     setNumberOfDaysInAMonth(days);
     setSelectedMonth(`${year}-${number.toString().padStart(2, "0")}`);
-    setChartTitle(
-      dayOfMonth.length === 0
-        ? dayTitle + " " + month
-        : dayOfMonth.slice(8, 10) + " " + month
-    );
-  }, [number, year, setSelectedMonth, setChartTitle, dayOfMonth]);
+    // setChartTitle(
+    //   dayOfMonth.length === 0
+    //     ? dayTitle + " " + month
+    //     : dayOfMonth.slice(8, 10) + " " + month
+    // );
+  }, [number, year, setSelectedMonth, dayOfMonth]);
 
   const handleClickDay = (e) => {
     const form = e.target.innerText;
@@ -268,51 +268,3 @@ export default function Calendar({
     </div>
   );
 }
-
-// import {
-//   LineChart,
-//   Line,
-//   CartesianGrid,
-//   XAxis,
-//   YAxis,
-//   Tooltip,
-// } from "recharts";
-//   <LineChart
-//   width={600}
-//   height={300}
-//   data={masiv}
-//   margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
-// >
-//   <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-//   <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-//   <XAxis dataKey="name" />
-//   <YAxis />
-//   <Tooltip />
-// </LineChart>;
-
-//  const dater = useSelector(selectActiveDate);
-//  const month = useSelector(selectMonth);
-//  console.log(month);
-
-//  function converter(dat) {
-//    const day = dat.toISOString().split("T")[0];
-//    const days = new Date(day);
-//    const firstDay = days.getTime() - 24 * 60 * 60 * 1000;
-//    const secondDay = days.getTime() - 24 * 2 * 60 * 60 * 1000;
-//    const thirdDay = days.getTime() - 24 * 3 * 60 * 60 * 1000;
-//    const fourthDay = days.getTime() - 24 * 4 * 60 * 60 * 1000;
-//    const fifthDay = days.getTime() - 24 * 5 * 60 * 60 * 1000;
-//    const sixthDay = days.getTime() - 24 * 6 * 60 * 60 * 1000;
-//    return [
-//      { name: new Date(sixthDay).getDate(), uv: 5000 },
-//      { name: new Date(fifthDay).getDate(), uv: 2500 },
-//      { name: new Date(fourthDay).getDate(), uv: 3000 },
-//      { name: new Date(thirdDay).getDate(), uv: 2000 },
-//      { name: new Date(secondDay).getDate(), uv: 2000 },
-//      { name: new Date(firstDay).getDate(), uv: 2400 },
-//      { name: new Date(day).getDate(), uv: 3000 },
-//    ];
-//  }
-
-//  const masiv = converter(new Date(dater));
-//  console.log(masiv);

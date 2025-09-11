@@ -2,18 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import DetailedInfo from "../../components/DetailedInfo/DetailedInfo.jsx";
 import MeasurementSchedule from "../../components/MeasurementSchedule/MeasurementSchedule.jsx";
 import s from "./TrackerPage.module.css";
-import {
-  selectErrorUser,
-  selectToken,
-  selectUser,
-} from "../../redux/auth/selectors.js";
+import { selectUser } from "../../redux/auth/selectors.js";
 import { Suspense, useEffect, useState } from "react";
 import {
   signoutRequest,
   userInformRequest,
 } from "../../redux/auth/operations.js";
 import toast, { Toaster } from "react-hot-toast";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   oneDayRequest,
   oneMonthRequest,
@@ -39,7 +35,7 @@ export default function TrackerPage() {
       .toString()
       .padStart(2, "0")}`
   );
-  const [chartTitle, setChartTitle] = useState("");
+  // const [chartTitle, setChartTitle] = useState("");
   const [addingDimension, setAddingDimension] = useState({});
   const dispatch = useDispatch();
   const userInformation = useSelector(selectUser);
@@ -138,7 +134,7 @@ export default function TrackerPage() {
         </li>
         <li className={s.boxDetailed}>
           <DetailedInfo
-            setChartTitle={setChartTitle}
+            // setChartTitle={setChartTitle}
             setAddingDimensionModal={setAddingDimensionModal}
             setSelectedDay={setSelectedDay}
             setSelectedMonth={setSelectedMonth}

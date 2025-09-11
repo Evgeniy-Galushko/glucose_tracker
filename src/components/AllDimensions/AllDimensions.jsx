@@ -82,7 +82,7 @@ export default function AllDimensions() {
           ) : (
             <div ref={printRef} className={s.boxTable}>
               <table className={s.table}>
-                <tbody>
+                <thead>
                   <tr>
                     <th className={s.titleLine}>Дата</th>
                     <th className={s.titleLine}>Время</th>
@@ -90,15 +90,20 @@ export default function AllDimensions() {
                     <th className={s.titleLine}>Время измерения</th>
                     <th className={s.titleLine}>Норма</th>
                   </tr>
+                </thead>
+                <tbody>
                   {allDimensions.map(
-                    ({
-                      date,
-                      measurementTime,
-                      onAnEmptyStomach,
-                      afterEating,
-                      time,
-                      _id,
-                    }) => {
+                    (
+                      {
+                        date,
+                        measurementTime,
+                        onAnEmptyStomach,
+                        afterEating,
+                        time,
+                        _id,
+                      },
+                      index
+                    ) => {
                       const minSugar = SugarNorm(measurementTime, age).minSugar;
                       const maxSugar = SugarNorm(measurementTime, age).maxSugar;
                       const afterEatingSugarMin = SugarNorm(
@@ -111,7 +116,7 @@ export default function AllDimensions() {
                       ).afterEatingSugarMax;
 
                       return (
-                        <tr key={_id}>
+                        <tr key={_id} className={s.tableRow}>
                           <td className={clsx(s.tableRows, s.widthDate)}>
                             {date}
                           </td>
